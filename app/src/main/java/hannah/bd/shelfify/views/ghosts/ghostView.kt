@@ -1,8 +1,8 @@
 package com.hannah.shelfify.views.ghosts
 
-import android.graphics.Color
 import android.text.Layout
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import hannah.bd.getitwrite.GlobalVariables
 import hannah.bd.shelfify.R
@@ -83,11 +84,10 @@ fun ghostView() {
         if (quote.isNotEmpty()) {
             Text(
                 text = quote,
-                color = Color.BLACK,
+                color = Color.Black,
                 modifier = Modifier
-                    .align(Layout.Alignment.TopCenter)
                     .padding(16.dp)
-                    .background(Color.WHITE)
+                    .background(Color.White)
                     .clickable {
                         quote = ""
                     }
