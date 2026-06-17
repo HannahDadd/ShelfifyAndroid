@@ -20,7 +20,7 @@ import kotlin.random.Random
 @Composable
 fun backGroundView() {
     val index = (0..3).random()
-    
+
     when (index) {
         0 -> {
             rainView()
