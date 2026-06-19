@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import hannah.bd.shelfify.R
+import hannah.bd.shelfify.views.components.NumberInput
 import java.util.Date
 import kotlin.random.Random
 
@@ -38,9 +39,7 @@ import kotlin.random.Random
 @SuppressLint("NewApi")
 @Composable
 fun SprintStack(db: AppDatabase?, onFinish: () -> Unit, initialMinute: Int) {
-    var sprintState by remember { mutableStateOf(SprintState.START) }
-    var selectedWip by remember { mutableStateOf<WIP?>(db?.wipDao()?.getAll()?.get(0)) }
-    var startWordCount by remember { mutableStateOf(0) }
+    var sprintState by remember { mutableStateOf(SprintState.SPRINT) }
     var endWordCount by remember { mutableStateOf(0) }
 
     when (sprintState) {
@@ -63,8 +62,7 @@ fun SprintStack(db: AppDatabase?, onFinish: () -> Unit, initialMinute: Int) {
                 Text("Sprint Finished!",
                     fontSize = 32.sp,
                     fontFamily = FontFamily(Font(R.font.abrilfatfaceregular)))
-                Text("Start word count: $startWordCount words", fontWeight = FontWeight.Bold)
-                NumberInput(label = "End Word Count", value = endWordCount) {
+                NumberInput(label = "How many words did you write?", value = endWordCount) {
                     endWordCount = it
                 }
 

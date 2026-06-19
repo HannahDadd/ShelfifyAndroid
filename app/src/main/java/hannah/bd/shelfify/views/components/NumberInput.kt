@@ -1,4 +1,4 @@
-package hannah.bd.getitwrite.views.components
+package hannah.bd.shelfify.views.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
