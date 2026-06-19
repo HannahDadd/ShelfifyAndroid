@@ -56,8 +56,8 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    val room_version = "2.5.1"
-
+//    val room_version = "2.5.1"
+//
 //    implementation ("androidx.room:room-runtime:$room_version")
 //    ksp("androidx.room:room-compiler:$room_version")
 //    ksp("androidx.room:room-compiler:$room_version")

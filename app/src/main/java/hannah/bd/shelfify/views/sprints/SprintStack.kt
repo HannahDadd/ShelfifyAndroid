@@ -38,7 +38,9 @@ import kotlin.random.Random
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("NewApi")
 @Composable
-fun SprintStack(db: AppDatabase?, onFinish: () -> Unit, initialMinute: Int) {
+fun SprintStack(
+//    db: AppDatabase?,
+    onFinish: () -> Unit, initialMinute: Int) {
     var sprintState by remember { mutableStateOf(SprintState.SPRINT) }
     var endWordCount by remember { mutableStateOf(0) }
 

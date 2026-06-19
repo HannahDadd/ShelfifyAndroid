@@ -23,9 +23,11 @@ import hannah.bd.shelfify.ui.theme.ShelfifyTheme
 import hannah.bd.shelfify.views.notifications.NotificationHelper
 
 class MainActivity : ComponentActivity() {
+//    var db: AppDatabase? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         NotificationHelper.createChannel(this)
+        super.onCreate(savedInstanceState?: Bundle())
         enableEdgeToEdge()
         setContent {
             ShelfifyTheme {
@@ -42,6 +44,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
+//    db = Room.databaseBuilder(
+//        applicationContext,
+//        AppDatabase::class.java, "database-name"
+//    ).allowMainThreadQueries().build()
+
     Text(
         text = "Hello $name!",
         modifier = modifier
