@@ -30,14 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import hannah.bd.getitwrite.R
-import hannah.bd.getitwrite.modals.AppDatabase
-import hannah.bd.getitwrite.modals.Stat
-import hannah.bd.getitwrite.modals.WIP
-import hannah.bd.getitwrite.views.components.NumberInput
-import hannah.bd.getitwrite.views.graphs.GraphForWIP
-import hannah.bd.getitwrite.views.wips.SelectWip
-import hannah.bd.getitwrite.views.wips.WIPView
+import hannah.bd.shelfify.R
 import java.util.Date
 import kotlin.random.Random
 
@@ -49,70 +42,12 @@ fun SprintStack(db: AppDatabase?, onFinish: () -> Unit, initialMinute: Int) {
     var selectedWip by remember { mutableStateOf<WIP?>(db?.wipDao()?.getAll()?.get(0)) }
     var startWordCount by remember { mutableStateOf(0) }
     var endWordCount by remember { mutableStateOf(0) }
-    var timePickerState by remember { mutableStateOf(TimePickerState(
-        initialHour = 0,
-        initialMinute = 0,
-        is24Hour = true
-    )) }
-    if (initialMinute < 60) {
-        timePickerState = TimePickerState(
-            initialHour = 0,
-            initialMinute = initialMinute,
-            is24Hour = true)
-    } else {
-        timePickerState = TimePickerState(
-            initialHour = 1,
-            initialMinute = 0,
-            is24Hour = true)
-    }
-    var showWipSelector by remember { mutableStateOf(false) }
 
     when (sprintState) {
-        SprintState.START -> {
-            Column(modifier = Modifier.padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(
-                    space = 20.dp,
-                    alignment = Alignment.CenterVertically
-                ),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text("Let's Sprint!",
-                    fontSize = 32.sp,
-                    fontFamily = FontFamily(Font(R.font.abrilfatfaceregular)))
-                selectedWip?.let {
-                    WIPView(wip = it) {}
-                    TextButton(onClick = { showWipSelector = true }) {
-                        Text("Change the WIP you're working on.")
-                    }
-                } ?: Button(onClick = { showWipSelector = true }) {
-                    Text("Select the project you're working on.")
-                }
-                Spacer(Modifier.height(16.dp))
-                TimeInput(
-                    state = timePickerState,
-                )
-                Spacer(Modifier.weight(1f))
-                Button(onClick = { sprintState = SprintState.SPRINT }) {
-                    Text("Start")
-                }
-            }
-
-            if (showWipSelector) {
-                Dialog(onDismissRequest = { showWipSelector = false }) {
-                    Surface(shape = RoundedCornerShape(8.dp)) {
-                        SelectWip(db, onWipSelected = {
-                            selectedWip = it
-                            startWordCount = it.count
-                            showWipSelector = false
-                        })
-                    }
-                }
-            }
-        }
 
         SprintState.SPRINT -> {
             Sprint(
-                initialTime = timePickerState.hour * 60 + timePickerState.minute,
+                initialTime = initialMinute,
                 onEnd = { sprintState = SprintState.END }
             )
         }
@@ -128,58 +63,12 @@ fun SprintStack(db: AppDatabase?, onFinish: () -> Unit, initialMinute: Int) {
                 Text("Sprint Finished!",
                     fontSize = 32.sp,
                     fontFamily = FontFamily(Font(R.font.abrilfatfaceregular)))
-                selectedWip?.let {
-                    WIPView(wip = it) {}
-                }
                 Text("Start word count: $startWordCount words", fontWeight = FontWeight.Bold)
                 NumberInput(label = "End Word Count", value = endWordCount) {
                     endWordCount = it
                 }
 
                 Spacer(Modifier.weight(1f))
-                Button(onClick = {
-                    val wordsWritten = endWordCount - startWordCount
-                    val stat = Stat(
-                        id = Random.nextInt(),
-                        wordsWritten = wordsWritten,
-                        date = Date(),
-                        wipId = selectedWip?.id,
-                        minutes = timePickerState.hour * 60 + timePickerState.minute
-                    )
-                    db?.let {
-                        db.statDao().insertAll(arrayOf(stat))
-                        selectedWip?.let { w ->
-                            db.wipDao().delete(w)
-                            val newWip = WIP(
-                                id = w.id,
-                                title = w.title,
-                                count = w.count + wordsWritten,
-                                goal = w.goal
-                            )
-                            db.wipDao().insertAll(arrayOf(newWip))
-                        }
-                    }
-                    sprintState = SprintState.SHOW_RESULTS
-                }) {
-                    Text("Finish")
-                }
-            }
-        }
-
-        SprintState.SHOW_RESULTS -> {
-            Column(modifier = Modifier
-                .verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.spacedBy(
-                    space = 20.dp,
-                    alignment = Alignment.CenterVertically
-                ),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text("You're one step closer to hitting that writing goal!", style = MaterialTheme.typography.headlineMedium)
-                Text("You wrote ${endWordCount - startWordCount} words in ${timePickerState.hour * 60 + timePickerState.minute} minutes.")
-                selectedWip?.let {
-                    GraphForWIP(db, wip = it)
-                }
                 Button(onClick = onFinish) {
                     Text("Back To Home Page")
                 }
@@ -189,8 +78,6 @@ fun SprintStack(db: AppDatabase?, onFinish: () -> Unit, initialMinute: Int) {
 }
 
 enum class SprintState(val label: String) {
-    START("Start"),
     SPRINT("Sprint"),
-    END("End"),
-    SHOW_RESULTS("Show Results")
+    END("End")
 }
