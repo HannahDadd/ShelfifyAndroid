@@ -5,6 +5,8 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.provider.Settings
+import java.util.Calendar
 import kotlin.jvm.java
 
 object DailyNotificationScheduler {
@@ -54,10 +56,6 @@ object DailyNotificationScheduler {
         if (calendar.timeInMillis <= System.currentTimeMillis()) {
             calendar.add(Calendar.DAY_OF_YEAR, 1)
         }
-
-        val alarmManager =
-            context.getSystemService(Context.ALARM_SERVICE)
-                    as AlarmManager
 
         alarmManager.setExactAndAllowWhileIdle(
             AlarmManager.RTC_WAKEUP,

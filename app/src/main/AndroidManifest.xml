@@ -24,7 +24,7 @@
         </activity>
     </application>
     <receiver
-        android:name=".NotificationReceiver"
+        android:name=".views.notifications.DailyNotificationReceiver"
         android:exported="false" />
     <uses-permission
         android:name="android.permission.POST_NOTIFICATIONS" />
