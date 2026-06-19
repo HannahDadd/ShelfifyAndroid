@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import hannah.bd.shelfify.R
+import hannah.bd.shelfify.views.settings.settingsView
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -90,7 +91,7 @@ fun MenuBar(
                 showSettings = false
             }
         ) {
-            SettingsView()
+            settingsView()
         }
     }
 }

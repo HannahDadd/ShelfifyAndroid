@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import hannah.bd.getitwrite.GlobalVariables
 import hannah.bd.getitwrite.GlobalVariables.inspiringQuotes
-import hannah.bd.getitwrite.R
 import kotlinx.coroutines.delay
 
 @Composable
