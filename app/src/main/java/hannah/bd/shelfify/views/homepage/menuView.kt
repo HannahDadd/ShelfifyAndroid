@@ -24,7 +24,7 @@ import hannah.bd.shelfify.views.settings.settingsView
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MenuBar(
+fun MenuView(
     growAction: () -> Unit
 ) {
 

@@ -4,11 +4,16 @@ import android.R.attr.height
 import android.R.attr.x
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fitInside
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.autofill.contentType
 import androidx.compose.ui.layout.ContentScale
@@ -19,9 +24,10 @@ import kotlin.random.Random
 
 @Composable
 fun backGroundView() {
-    val index = (0..3).random()
+    val index = (0..0).random()
 
-    when (index) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        when (index) {
         0 -> {
             rainView()
         }
@@ -29,22 +35,26 @@ fun backGroundView() {
             Image(
                 painter = painterResource(id = R.drawable.day),
                 contentDescription = "day",
-                contentScale = ContentScale.Fit
+                contentScale = ContentScale.FillWidth,
+                modifier = Modifier.fillMaxSize()
             )
         }
         2 -> {
             Image(
                 painter = painterResource(id = R.drawable.dawn),
                 contentDescription = "day",
-                contentScale = ContentScale.Fit
+                contentScale = ContentScale.FillWidth,
+                modifier = Modifier.fillMaxSize()
             )
         }
         3 -> {
             Image(
                 painter = painterResource(id = R.drawable.night),
                 contentDescription = "day",
-                contentScale = ContentScale.Fit
+                contentScale = ContentScale.FillWidth,
+                modifier = Modifier.fillMaxSize()
             )
         }
+    }
     }
 }

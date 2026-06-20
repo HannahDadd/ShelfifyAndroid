@@ -72,7 +72,7 @@ fun rainView() {
         Image(
             painter = painterResource(R.drawable.rain),
             contentDescription = null,
-            contentScale = ContentScale.Fit,
+            contentScale = ContentScale.FillBounds,
             modifier = Modifier.fillMaxSize()
         )
 

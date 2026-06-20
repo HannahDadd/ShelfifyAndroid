@@ -1,6 +1,9 @@
 package com.hannah.shelfify.views.ghosts
 
+import android.R.attr.duration
+import android.R.attr.text
 import android.text.Layout
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -76,6 +79,8 @@ fun ghostView() {
             SingleGhostView(
                 ghost = ghost,
                 onGhostTapped = {
+                    val toast = Toast.makeText(this, "hi", Toast.LENGTH_SHORT) // in Activity
+                    toast.show()
                     quote = ghost.comments.randomOrNull() ?: ""
                 }
             )
