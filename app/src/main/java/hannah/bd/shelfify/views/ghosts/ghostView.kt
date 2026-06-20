@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import hannah.bd.getitwrite.GlobalVariables
+import hannah.bd.shelfify.MainActivity
 import hannah.bd.shelfify.R
 
 @Composable
@@ -79,9 +80,7 @@ fun ghostView() {
             SingleGhostView(
                 ghost = ghost,
                 onGhostTapped = {
-                    val toast = Toast.makeText(this, "hi", Toast.LENGTH_SHORT) // in Activity
-                    toast.show()
-                    quote = ghost.comments.randomOrNull() ?: ""
+                    quote = "hello"
                 }
             )
         }

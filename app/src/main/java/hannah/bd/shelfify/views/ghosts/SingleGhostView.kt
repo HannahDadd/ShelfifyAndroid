@@ -1,12 +1,15 @@
 package com.hannah.shelfify.views.ghosts
 
+import android.R.attr.onClick
 import android.media.Image
+import android.util.Log
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.animateOffsetAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -69,6 +72,7 @@ fun SingleGhostView(
     )
 
     LaunchedEffect(Unit) {
+        Log.d("Ghost", "hello")
 
         while (true) {
 
