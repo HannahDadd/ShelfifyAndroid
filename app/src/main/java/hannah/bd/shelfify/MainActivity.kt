@@ -21,10 +21,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.hannah.shelfify.views.ghosts.ghostView
 import hannah.bd.shelfify.ui.theme.ShelfifyTheme
 import hannah.bd.shelfify.views.homepage.LibraryView
 import hannah.bd.shelfify.views.homepage.MenuView
+import hannah.bd.shelfify.views.homepage.NavigationStack
+import hannah.bd.shelfify.views.homepage.Screen
 import hannah.bd.shelfify.views.homepage.backGroundView
 import hannah.bd.shelfify.views.homepage.growYourLibraryHomepage
 import hannah.bd.shelfify.views.notifications.NotificationHelper
@@ -39,7 +42,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ShelfifyTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    AppMainPage(modifier = Modifier.padding(innerPadding))
+                    NavigationStack(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -47,7 +50,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun AppMainPage(modifier: Modifier) {
+fun AppMainPage(navController: NavController) {
 //    db = Room.databaseBuilder(
 //        applicationContext,
 //        AppDatabase::class.java, "database-name"
@@ -58,7 +61,7 @@ fun AppMainPage(modifier: Modifier) {
     ) {
         backGroundView()
         LibraryView(4000)
-        MenuView({})
+        MenuView({ navController.navigate(Screen.Grow.route)})
         ghostView()
     }
 }
