@@ -1,6 +1,7 @@
 package hannah.bd.getitwrite.views.sprints
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.MaterialTheme
@@ -21,7 +22,8 @@ fun SprintCarousel(
     onAction: (SprintDurations) -> Unit
 ) {
     Column(
-        horizontalAlignment = Alignment.Start
+        horizontalAlignment = Alignment.Start,
+        modifier = Modifier.fillMaxWidth()
     ) {
         Text(
             text = "Choose a writing sprint".uppercase(),
@@ -29,27 +31,27 @@ fun SprintCarousel(
             style = MaterialTheme.typography.labelLarge
         )
 
-        LazyRow(
-//            modifier = Modifier.padding(horizontal = 8.dp)
-        ) {
-            item {
+//        LazyRow(
+////            modifier = Modifier.padding(horizontal = 8.dp)
+//        ) {
+//            item {
                 StartSprintCard(
                     text = "20 mins",
                     onClick = { onAction(SprintDurations.TWENTY_MINS) }
                 )
-            }
-            item {
+//            }
+//            item {
                 StartSprintCard(
                     text = "40 mins",
                     onClick = { onAction(SprintDurations.FORTY_MINS) }
                 )
-            }
-            item {
+//            }
+//            item {
                 StartSprintCard(
                     text = "1 hour",
                     onClick = { onAction(SprintDurations.ONE_HOUR) }
                 )
-            }
-        }
+//            }
+//        }
     }
 }

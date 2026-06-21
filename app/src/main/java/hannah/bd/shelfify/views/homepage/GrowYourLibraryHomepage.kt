@@ -27,6 +27,7 @@ import androidx.navigation.NavController
 import hannah.bd.getitwrite.views.sprints.SprintCarousel
 import hannah.bd.getitwrite.views.sprints.SprintDurations
 import hannah.bd.shelfify.R
+import hannah.bd.shelfify.views.notifications.DailyReminderButton
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,7 +40,7 @@ fun growYourLibraryHomepage(
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        "Grow your Library",
+                        "🪴 Grow your Library 🪴",
                     )
                 },
                 navigationIcon = {
@@ -74,6 +75,9 @@ fun growYourLibraryHomepage(
                             SprintDurations.ONE_HOUR -> navController.navigate("sprint60")
                         }
                     }
+                }
+                item {
+                    DailyReminderButton()
                 }
             }
         }
