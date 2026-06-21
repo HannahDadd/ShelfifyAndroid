@@ -22,8 +22,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import com.example.compose.AppTheme
 import com.hannah.shelfify.views.ghosts.ghostView
-import hannah.bd.shelfify.ui.theme.ShelfifyTheme
 import hannah.bd.shelfify.views.homepage.LibraryView
 import hannah.bd.shelfify.views.homepage.MenuView
 import hannah.bd.shelfify.views.homepage.NavigationStack
@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState?: Bundle())
         enableEdgeToEdge()
         setContent {
-            ShelfifyTheme {
+            AppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     NavigationStack(modifier = Modifier.padding(innerPadding))
                 }

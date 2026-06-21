@@ -18,6 +18,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
@@ -51,7 +53,7 @@ fun Sprint(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.primary)
+            .background(colorResource(R.color.darkGreen))
             .padding(16.dp)
     ) {
         Column(
@@ -64,7 +66,7 @@ fun Sprint(
             Text(
                 text = inspiringQuotes[quoteNumber],
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onPrimary,
+                color = Color.White,
                 fontFamily = FontFamily(Font(R.font.bellefairregularfont)),
                 fontSize = 28.sp
             )
@@ -73,16 +75,16 @@ fun Sprint(
 
             Text(
                 text = "Sprint Time Remaining (minutes):",
-                color = MaterialTheme.colorScheme.onPrimary,
-                fontFamily = FontFamily(Font(R.font.abrilfatfaceregular)),
+                color = Color.White,
+                fontFamily = FontFamily(Font(R.font.bellefairregularfont)),
                 fontSize = 20.sp
             )
 
             Text(
                 text = "$timeRemaining",
-                color = MaterialTheme.colorScheme.onPrimary,
+                color = Color.White,
                 fontFamily = FontFamily(Font(R.font.abrilfatfaceregular)),
-                fontSize = 48.sp
+                fontSize = 150.sp
             )
 
             Spacer(modifier = Modifier.height(16.dp))

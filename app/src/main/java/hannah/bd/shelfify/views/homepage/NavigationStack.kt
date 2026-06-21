@@ -17,6 +17,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import hannah.bd.getitwrite.views.sprints.SprintStack
 import hannah.bd.shelfify.AppMainPage
 
 sealed class Screen(val route: String) {
@@ -35,7 +36,17 @@ fun NavigationStack(modifier: Modifier) {
         composable(
             route = Screen.Grow.route
         ) {
-            growYourLibraryHomepage({ navController.popBackStack() })
+            growYourLibraryHomepage(navController, { navController.popBackStack() })
+        }
+        composable("sprint20") {
+            SprintStack(
+                onFinish = { navController.popBackStack() }, 20)
+        }
+        composable("sprint40") {
+            SprintStack(onFinish = { navController.popBackStack() }, 40)
+        }
+        composable("sprint60") {
+            SprintStack(onFinish = { navController.popBackStack() }, 60)
         }
     }
 }

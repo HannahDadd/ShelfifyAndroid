@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -29,13 +31,13 @@ fun StartSprintCard(
             .padding(8.dp)
             .size(width = 150.dp, height = 100.dp)
             .clip(RoundedCornerShape(8.dp))
-            .background(MaterialTheme.colorScheme.secondaryContainer)
+            .background(colorResource(R.color.darkGreen))
             .clickable { onClick() }
             .padding(12.dp)
     ) {
         Text(
             text = text,
-            color = MaterialTheme.colorScheme.onSecondaryContainer,
+            color = Color.White,
             fontSize = 28.sp,
             fontFamily = FontFamily(Font(R.font.abrilfatfaceregular)),
             fontWeight = FontWeight.Bold,

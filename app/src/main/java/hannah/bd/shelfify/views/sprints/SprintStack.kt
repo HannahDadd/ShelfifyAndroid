@@ -54,7 +54,7 @@ fun SprintStack(
         }
 
         SprintState.END -> {
-            Column(modifier = Modifier.padding(16.dp),
+            Column(modifier = Modifier.padding(28.dp),
                 verticalArrangement = Arrangement.spacedBy(
                     space = 20.dp,
                     alignment = Alignment.CenterVertically
@@ -70,7 +70,7 @@ fun SprintStack(
 
                 Spacer(Modifier.weight(1f))
                 Button(onClick = onFinish) {
-                    Text("Back To Home Page")
+                    Text("Finish")
                 }
             }
         }
