@@ -16,6 +16,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -27,6 +29,7 @@ import androidx.navigation.NavController
 import hannah.bd.getitwrite.views.sprints.SprintCarousel
 import hannah.bd.getitwrite.views.sprints.SprintDurations
 import hannah.bd.shelfify.R
+import hannah.bd.shelfify.modals.UserPreferences
 import hannah.bd.shelfify.views.notifications.DailyReminderButton
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -34,7 +37,12 @@ import hannah.bd.shelfify.views.notifications.DailyReminderButton
 fun growYourLibraryHomepage(
     navController: NavController,
     navigateBack: () -> Unit,
+    userPreferences: UserPreferences
 ) {
+    val wordsWritten by userPreferences
+        .wordsWritten
+        .collectAsState(initial = 0)
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -63,7 +71,7 @@ fun growYourLibraryHomepage(
             ) {
                 item {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text("Words written in the app",
+                        Text("Words written in the app: ${ wordsWritten }",
                                 fontFamily = FontFamily(Font(R.font.bellefairregularfont)),)
                     }
                 }

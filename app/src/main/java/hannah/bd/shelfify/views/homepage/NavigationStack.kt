@@ -42,7 +42,7 @@ fun NavigationStack(modifier: Modifier) {
         composable(
             route = Screen.Grow.route
         ) {
-            growYourLibraryHomepage(navController, { navController.popBackStack() })
+            growYourLibraryHomepage(navController, { navController.popBackStack() }, userPreferences = preferences)
         }
         composable("sprint20") {
             SprintStack(
