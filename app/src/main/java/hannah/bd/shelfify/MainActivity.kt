@@ -19,11 +19,16 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.compose.AppTheme
 import com.hannah.shelfify.views.ghosts.ghostView
+import hannah.bd.shelfify.modals.UserPreferences
+import hannah.bd.shelfify.modals.onboardingPages
 import hannah.bd.shelfify.views.homepage.LibraryView
 import hannah.bd.shelfify.views.homepage.MenuView
 import hannah.bd.shelfify.views.homepage.NavigationStack
@@ -31,6 +36,8 @@ import hannah.bd.shelfify.views.homepage.Screen
 import hannah.bd.shelfify.views.homepage.backGroundView
 import hannah.bd.shelfify.views.homepage.growYourLibraryHomepage
 import hannah.bd.shelfify.views.notifications.NotificationHelper
+import hannah.bd.shelfify.views.onboarding.OnboardingOverlay
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 //    var db: AppDatabase? = null
@@ -50,11 +57,16 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun AppMainPage(navController: NavController) {
+fun AppMainPage(navController: NavController, userPreferences: UserPreferences) {
 //    db = Room.databaseBuilder(
 //        applicationContext,
 //        AppDatabase::class.java, "database-name"
 //    ).allowMainThreadQueries().build()
+
+    val scope = rememberCoroutineScope()
+    val hasSeenOnboarding by userPreferences
+        .hasSeenOnboarding
+        .collectAsState(initial = false)
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -63,6 +75,17 @@ fun AppMainPage(navController: NavController) {
         LibraryView(4000)
         MenuView({ navController.navigate(Screen.Grow.route)})
         ghostView()
+
+        if (!hasSeenOnboarding) {
+            OnboardingOverlay(
+                pages = onboardingPages,
+                onFinished = {
+                    scope.launch {
+                        userPreferences.completeOnboarding()
+                    }
+                }
+            )
+        }
     }
 }
 
