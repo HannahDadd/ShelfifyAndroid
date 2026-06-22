@@ -1,20 +1,25 @@
 package hannah.bd.shelfify.modals
 
 data class OnboardingPage(
-    val description: String
+    val description: String,
+    val description2: String
 )
 
 val onboardingPages = listOf(
     OnboardingPage(
-        description = "Welcome Writer! You've stumbled across an abandoned library!"
+        description = "Welcome Writer! You've stumbled across an abandoned library!",
+        description2 = ""
     ),
     OnboardingPage(
-        description = "With every word you add to your writing projects, the library will grow until one day, you can add your own book to these shelves!"
+        description = "With every word you write, the library will grow.",
+        description2 = ""
     ),
     OnboardingPage(
-        description = "Use Shelfify's focus mode, daily notifications and motivational widgets to help you write. We don't collect any data and work fully offline so it's totally distraction free."
+        description = "Use focus mode, daily notifications and motivational widgets to stay consistent.",
+        description2 = "Shelfify works fully offline so it's totally distraction free."
     ),
     OnboardingPage(
-        description = "Let's get started- I can't wait to see what you do with the place."
+        description = "Let's get writing.",
+        description2 = ""
     )
 )

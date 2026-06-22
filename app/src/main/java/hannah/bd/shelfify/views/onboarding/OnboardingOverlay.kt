@@ -2,6 +2,8 @@ package hannah.bd.shelfify.views.onboarding
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -57,43 +59,36 @@ fun OnboardingOverlay(
                     contentDescription = null,
                     modifier = Modifier.size(50.dp)
                 )
+
+                Spacer(Modifier.height(24.dp))
+
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(15.dp)
+                ) {
+                    OnboardingText(page.description)
+
+                    if(page.description2 != "") {
+                        OnboardingText(page.description2)
+                    }
+                }
             }
 
-            Spacer(Modifier.height(24.dp))
+            Spacer(Modifier.height(48.dp))
 
-            TypewriterText(
-                text = page.description,
-                speed = 20L
-            )
+            Row {
+                Spacer(Modifier.height(32.dp))
 
-            Spacer(Modifier.height(32.dp))
-
-            Button(
-                onClick = {
-                    if (currentPage < pages.lastIndex) {
-                        currentPage++
-                    } else {
-                        onFinished()
-                    }
-                }
-            ) {
-                Card(
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color.White
-                    ),
-                    shape = RoundedCornerShape(16.dp)
-                ) {
-                    Column(
-                        modifier = Modifier.padding(16.dp)
-                    ) {
-                        TypewriterText(page.description)
-                    }
-                }
-                Text(
-                    if (currentPage == pages.lastIndex)
-                        "Get Started"
-                    else
-                        "Next"
+                Image(
+                    painter = painterResource(R.drawable.nextbtn),
+                    contentDescription = "Next button",
+                    modifier = Modifier.size(75.dp)
+                        .clickable {
+                            if (currentPage < pages.lastIndex) {
+                                currentPage++
+                            } else {
+                                onFinished()
+                            }
+                        }
                 )
             }
         }
