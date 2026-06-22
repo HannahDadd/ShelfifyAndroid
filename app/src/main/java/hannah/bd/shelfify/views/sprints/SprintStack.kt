@@ -40,7 +40,7 @@ import kotlin.random.Random
 @Composable
 fun SprintStack(
 //    db: AppDatabase?,
-    onFinish: () -> Unit, initialMinute: Int) {
+    onFinish: (Int) -> Unit, initialMinute: Int) {
     var sprintState by remember { mutableStateOf(SprintState.SPRINT) }
     var endWordCount by remember { mutableStateOf(0) }
 
@@ -69,7 +69,7 @@ fun SprintStack(
                 }
 
                 Spacer(Modifier.weight(1f))
-                Button(onClick = onFinish) {
+                Button(onClick = { onFinish(endWordCount) }) {
                     Text("Finish")
                 }
             }

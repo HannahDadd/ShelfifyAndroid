@@ -11,6 +11,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavType
@@ -21,6 +22,7 @@ import androidx.navigation.navArgument
 import hannah.bd.getitwrite.views.sprints.SprintStack
 import hannah.bd.shelfify.AppMainPage
 import hannah.bd.shelfify.modals.UserPreferences
+import kotlinx.coroutines.launch
 
 sealed class Screen(val route: String) {
     object Main: Screen("main_screen")
@@ -30,10 +32,12 @@ sealed class Screen(val route: String) {
 @Composable
 fun NavigationStack(modifier: Modifier) {
     val navController = rememberNavController()
+    var preferences = UserPreferences(LocalContext.current)
+    val scope = rememberCoroutineScope()
 
     NavHost(navController = navController, startDestination = Screen.Main.route) {
         composable(route = Screen.Main.route) {
-            AppMainPage(navController = navController, UserPreferences(LocalContext.current))
+            AppMainPage(navController = navController, preferences)
         }
         composable(
             route = Screen.Grow.route
@@ -42,13 +46,33 @@ fun NavigationStack(modifier: Modifier) {
         }
         composable("sprint20") {
             SprintStack(
-                onFinish = { navController.popBackStack() }, 20)
+                onFinish = {
+                    scope.launch {
+                        preferences.updateWordCount(it)
+                    }
+                    navController.popBackStack()
+                           }, 20
+            )
         }
         composable("sprint40") {
-            SprintStack(onFinish = { navController.popBackStack() }, 40)
+            SprintStack(
+                onFinish = {
+                    scope.launch {
+                        preferences.updateWordCount(it)
+                    }
+                    navController.popBackStack()
+                }, 40
+            )
         }
         composable("sprint60") {
-            SprintStack(onFinish = { navController.popBackStack() }, 60)
+            SprintStack(
+                onFinish = {
+                    scope.launch {
+                        preferences.updateWordCount(it)
+                    }
+                    navController.popBackStack()
+                }, 60
+            )
         }
     }
 }

@@ -68,11 +68,15 @@ fun AppMainPage(navController: NavController, userPreferences: UserPreferences) 
         .hasSeenOnboarding
         .collectAsState(initial = false)
 
+    val wordsWritten by userPreferences
+        .wordsWritten
+        .collectAsState(initial = 0)
+
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
         backGroundView()
-        LibraryView(4000)
+        LibraryView(wordsWritten)
         MenuView({ navController.navigate(Screen.Grow.route)})
         ghostView()
 
