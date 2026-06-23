@@ -1,5 +1,6 @@
 package hannah.bd.getitwrite.views.sprints
 
+import android.R.attr.fontFamily
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -29,6 +30,7 @@ import hannah.bd.getitwrite.GlobalVariables
 import hannah.bd.getitwrite.GlobalVariables.inspiringQuotes
 import hannah.bd.shelfify.R
 import kotlinx.coroutines.delay
+import kotlin.math.floor
 
 @Composable
 fun Sprint(
@@ -41,7 +43,7 @@ fun Sprint(
     LaunchedEffect(timeRemaining) {
         if (timeRemaining > 0) {
             delay(1000L)
-            if (timeRemaining % 10 == 0) {
+            if (timeRemaining % 60 == 0) {
                 quoteNumber = (1 until GlobalVariables.inspiringQuotes.size - 1).random()
             }
             timeRemaining--
@@ -81,10 +83,10 @@ fun Sprint(
             )
 
             Text(
-                text = "$timeRemaining",
+                text = "${ String.format("%02d:%02d", timeRemaining / 60, timeRemaining % 60) }",
                 color = Color.White,
                 fontFamily = FontFamily(Font(R.font.abrilfatfaceregular)),
-                fontSize = 150.sp
+                fontSize = 120.sp
             )
 
             Spacer(modifier = Modifier.height(16.dp))
