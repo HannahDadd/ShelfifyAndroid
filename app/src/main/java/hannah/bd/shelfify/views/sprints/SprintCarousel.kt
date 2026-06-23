@@ -31,27 +31,19 @@ fun SprintCarousel(
             style = MaterialTheme.typography.labelLarge
         )
 
-//        LazyRow(
-////            modifier = Modifier.padding(horizontal = 8.dp)
-//        ) {
-//            item {
-                StartSprintCard(
-                    text = "20 mins",
-                    onClick = { onAction(SprintDurations.TWENTY_MINS) }
+        StartSprintCard(
+            text = "20 mins",
+            onClick = { onAction(SprintDurations.TWENTY_MINS) }
+        )
+
+        StartSprintCard(
+            text = "40 mins",
+            onClick = { onAction(SprintDurations.FORTY_MINS) }
+        )
+
+        StartSprintCard(
+            text = "1 hour",
+            onClick = { onAction(SprintDurations.ONE_HOUR) }
                 )
-//            }
-//            item {
-                StartSprintCard(
-                    text = "40 mins",
-                    onClick = { onAction(SprintDurations.FORTY_MINS) }
-                )
-//            }
-//            item {
-                StartSprintCard(
-                    text = "1 hour",
-                    onClick = { onAction(SprintDurations.ONE_HOUR) }
-                )
-//            }
-//        }
     }
 }

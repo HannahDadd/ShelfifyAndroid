@@ -85,7 +85,9 @@ fun growYourLibraryHomepage(
                     }
                 }
                 item {
-                    DailyReminderButton()
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        DailyReminderButton()
+                    }
                 }
             }
         }

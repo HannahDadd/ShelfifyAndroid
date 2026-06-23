@@ -24,7 +24,7 @@ import kotlin.random.Random
 
 @Composable
 fun backGroundView() {
-    val index = (0..0).random()
+    val index = (0..3).random()
 
     Box(modifier = Modifier.fillMaxSize()) {
         when (index) {
