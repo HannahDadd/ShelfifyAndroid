@@ -1,13 +1,10 @@
 package hannah.bd.shelfify.views.settings
 
-import android.R.attr.clickable
-import android.R.attr.text
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -17,40 +14,26 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.LinkAnnotation
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextLinkStyles
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import hannah.bd.shelfify.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun privacyPolicyView(
-    navController: NavController,
+fun HowItWorks(
     navigateBack: () -> Unit
 ) {
-    var enabled by remember { mutableStateOf(true)}
 
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        "Privacy Policy",
+                        "How Shelfify Works",
                     )
                 },
                 navigationIcon = {
@@ -73,17 +56,12 @@ fun privacyPolicyView(
             ) {
                 item {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text(
-                            buildAnnotatedString {
-                                withLink(
-                                    LinkAnnotation.Url(
-                                        "https://writingapps5.wordpress.com/privacy-policy-writing-games/",
-                                        TextLinkStyles(style = SpanStyle(color = Color.Blue))
-                                    )
-                                ) {
-                                    append("Our Privacy Policy can be found on our website")
-                                }
-                            }
+                        Text("""
+Property is hard to come by in this modern era. Luckily, you've stumbled across an abandoned library and all that's missing are the books! How do you add books? Simple. You write. Grow your library by completing writing sprints and adding words to your writing projects and books magically start filling the shelves.
+
+A few ghosts may visit your library- don't worry, they're friendly. Ish. I can't wait to see what you do with the place.
+
+                        """.trimIndent()
                         )
                     }
                 }

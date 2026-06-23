@@ -19,7 +19,9 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.AddCircle
 import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Settings
@@ -109,8 +111,15 @@ fun settingsView(navController: NavController) {
     ) { padding ->
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
             LazyColumn(contentPadding = PaddingValues(16.dp), modifier = Modifier.widthIn(max = 600.dp), state = listState) {
-                item { CategoryItem(title = "Account", icon = Icons.Outlined.AccountCircle, onClick = { /*TODO*/ }) }
-                item { CategoryItem(title = "Notifications", icon = Icons.Outlined.Notifications, onClick = { /*TODO*/ }) }
+                item { CategoryItem(title = "How Shelfify Works", icon = Icons.Outlined.Info, onClick = {
+                    navController.navigate("howItWorks")
+                }) }
+                item { CategoryItem(title = "How Shelfify Works", icon = Icons.Outlined.Info, onClick = {
+                    navController.navigate("howItWorks")
+                }) }
+                item { CategoryItem(title = "Our Other Apps", icon = Icons.Outlined.AddCircle, onClick = {
+                    navController.navigate("otherApps") })
+                }
                 item { HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp)) }
                 item { CategoryItem(title = "Privacy Policy", icon = Icons.Outlined.Lock, onClick = {
                     navController.navigate("privacyPolicy")
@@ -118,10 +127,10 @@ fun settingsView(navController: NavController) {
                 item { CategoryItem(title = "Terms and Conditions", icon = Icons.Outlined.Settings, onClick = {
                     navController.navigate("tsAndCs")
                 }) }
-                item { CategoryItem(title = "Send Feedback", icon = Icons.Outlined.Email, onClick = { /*TODO*/ }) }
+//                item { CategoryItem(title = "Send Feedback", icon = Icons.Outlined.Email, onClick = { /*TODO*/ }) }
                 item { HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp)) }
-                item { HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp)) }
-                item { AppVersion(versionText = "Version 1.0.0", copyrights = "© 2024 Your Company", onClick = { /* TODO Add easter egg after 8 times is clicked */ }) }
+//                item { HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp)) }
+//                item { AppVersion(versionText = "Version 1.0.0", copyrights = "© 2024 Your Company", onClick = { /* TODO Add easter egg after 8 times is clicked */ }) }
             }
         }
     }

@@ -22,6 +22,8 @@ import androidx.navigation.navArgument
 import hannah.bd.getitwrite.views.sprints.SprintStack
 import hannah.bd.shelfify.AppMainPage
 import hannah.bd.shelfify.modals.UserPreferences
+import hannah.bd.shelfify.views.settings.HowItWorks
+import hannah.bd.shelfify.views.settings.OurOtherApps
 import hannah.bd.shelfify.views.settings.TsAndCsView
 import hannah.bd.shelfify.views.settings.privacyPolicyView
 import kotlinx.coroutines.launch
@@ -81,6 +83,12 @@ fun NavigationStack(modifier: Modifier) {
         }
         composable("privacyPolicy") {
             privacyPolicyView(navController) { navController.popBackStack() }
+        }
+        composable("howItWorks") {
+            HowItWorks() { navController.popBackStack() }
+        }
+        composable("otherApps") {
+            OurOtherApps() { navController.popBackStack() }
         }
     }
 }
