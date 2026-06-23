@@ -55,7 +55,7 @@ fun NavigationStack(modifier: Modifier) {
                         preferences.updateWordCount(it)
                     }
                     navController.popBackStack()
-                           }, 20
+                           }, (20*60)
             )
         }
         composable("sprint40") {
@@ -65,7 +65,7 @@ fun NavigationStack(modifier: Modifier) {
                         preferences.updateWordCount(it)
                     }
                     navController.popBackStack()
-                }, 40
+                }, (40*60)
             )
         }
         composable("sprint60") {
@@ -75,7 +75,7 @@ fun NavigationStack(modifier: Modifier) {
                         preferences.updateWordCount(it)
                     }
                     navController.popBackStack()
-                }, 60
+                }, (60*60)
             )
         }
         composable("tsAndCs") {
