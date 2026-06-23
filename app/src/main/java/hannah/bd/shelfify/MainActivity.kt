@@ -58,10 +58,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun AppMainPage(navController: NavController, userPreferences: UserPreferences) {
-//    db = Room.databaseBuilder(
-//        applicationContext,
-//        AppDatabase::class.java, "database-name"
-//    ).allowMainThreadQueries().build()
 
     val scope = rememberCoroutineScope()
     val hasSeenOnboarding by userPreferences
@@ -77,7 +73,7 @@ fun AppMainPage(navController: NavController, userPreferences: UserPreferences) 
     ) {
         backGroundView()
         LibraryView(wordsWritten)
-        MenuView({ navController.navigate(Screen.Grow.route)})
+        MenuView({ navController.navigate(Screen.Grow.route)}, navController = navController)
         ghostView()
 
         if (!hasSeenOnboarding) {

@@ -22,6 +22,8 @@ import androidx.navigation.navArgument
 import hannah.bd.getitwrite.views.sprints.SprintStack
 import hannah.bd.shelfify.AppMainPage
 import hannah.bd.shelfify.modals.UserPreferences
+import hannah.bd.shelfify.views.settings.TsAndCsView
+import hannah.bd.shelfify.views.settings.privacyPolicyView
 import kotlinx.coroutines.launch
 
 sealed class Screen(val route: String) {
@@ -73,6 +75,12 @@ fun NavigationStack(modifier: Modifier) {
                     navController.popBackStack()
                 }, 60
             )
+        }
+        composable("tsAndCs") {
+            TsAndCsView(navController) { navController.popBackStack() }
+        }
+        composable("privacyPolicy") {
+            privacyPolicyView(navController) { navController.popBackStack() }
         }
     }
 }

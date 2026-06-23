@@ -19,13 +19,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import hannah.bd.shelfify.R
 import hannah.bd.shelfify.views.settings.settingsView
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuView(
-    growAction: () -> Unit
+    growAction: () -> Unit,
+    navController: NavController
 ) {
 
     var showButtons by remember {
@@ -91,7 +93,7 @@ fun MenuView(
                 showSettings = false
             }
         ) {
-            settingsView()
+            settingsView(navController)
         }
     }
 }

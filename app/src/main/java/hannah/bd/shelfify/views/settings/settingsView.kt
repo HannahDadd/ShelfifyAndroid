@@ -22,6 +22,7 @@ import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Notifications
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -40,7 +41,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 @Composable
 fun CategoryItem(title: String, icon: ImageVector, onClick: () -> Unit) {
@@ -73,7 +76,7 @@ fun AppVersion(versionText: String, copyrights: String, onClick: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun settingsView() {
+fun settingsView(navController: NavController) {
     val listState = rememberLazyListState()
     val hasScrolled by remember {
         derivedStateOf {
@@ -107,9 +110,14 @@ fun settingsView() {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
             LazyColumn(contentPadding = PaddingValues(16.dp), modifier = Modifier.widthIn(max = 600.dp), state = listState) {
                 item { CategoryItem(title = "Account", icon = Icons.Outlined.AccountCircle, onClick = { /*TODO*/ }) }
-                item { CategoryItem(title = "Privacy", icon = Icons.Outlined.Lock, onClick = { /*TODO*/ }) }
                 item { CategoryItem(title = "Notifications", icon = Icons.Outlined.Notifications, onClick = { /*TODO*/ }) }
                 item { HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp)) }
+                item { CategoryItem(title = "Privacy Policy", icon = Icons.Outlined.Lock, onClick = {
+                    navController.navigate("privacyPolicy")
+                }) }
+                item { CategoryItem(title = "Terms and Conditions", icon = Icons.Outlined.Settings, onClick = {
+                    navController.navigate("tsAndCs")
+                }) }
                 item { CategoryItem(title = "Send Feedback", icon = Icons.Outlined.Email, onClick = { /*TODO*/ }) }
                 item { HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp)) }
                 item { HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp)) }
