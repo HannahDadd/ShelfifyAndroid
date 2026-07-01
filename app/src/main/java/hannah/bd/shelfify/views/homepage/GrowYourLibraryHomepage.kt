@@ -9,10 +9,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,13 +33,20 @@ import hannah.bd.getitwrite.views.sprints.SprintDurations
 import hannah.bd.shelfify.R
 import hannah.bd.shelfify.modals.UserPreferences
 import hannah.bd.shelfify.views.notifications.DailyReminderButton
+import hannah.bd.shelfify.views.sprints.LiveUpdateCard
+import hannah.bd.shelfify.views.sprints.PermissionStatusCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun growYourLibraryHomepage(
     navController: NavController,
     navigateBack: () -> Unit,
-    userPreferences: UserPreferences
+    userPreferences: UserPreferences,
+    hasPermission: Boolean,
+    canPostPromoted: Boolean,
+    onRequestPermission: () -> Unit,
+    onOpenSettings: () -> Unit,
+    onStartFoodDelivery: () -> Unit,
 ) {
     val wordsWritten by userPreferences
         .wordsWritten
@@ -83,6 +92,27 @@ fun growYourLibraryHomepage(
                             SprintDurations.ONE_HOUR -> navController.navigate("sprint60")
                         }
                     }
+                }
+                item {
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        PermissionStatusCard(
+                            hasPermission = hasPermission,
+                            canPostPromoted = canPostPromoted,
+                            onRequestPermission = onRequestPermission,
+                            onOpenSettings = onOpenSettings
+                        )
+                    }
+                }
+                item {
+                    LiveUpdateCard(
+                        title = "🍕 Food Delivery Tracking",
+                        description = "Track your order with ProgressStyle milestones (Android 16+)",
+                        icon = Icons.Default.ShoppingCart,
+                        onClick = onStartFoodDelivery,
+                        enabled = hasPermission,
+                        color = MaterialTheme.colorScheme.primaryContainer,
+                        isNew = true
+                    )
                 }
                 item {
                     Column(modifier = Modifier.padding(8.dp)) {

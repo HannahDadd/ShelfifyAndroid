@@ -34,7 +34,14 @@ sealed class Screen(val route: String) {
 }
 
 @Composable
-fun NavigationStack(modifier: Modifier) {
+fun NavigationStack(
+    modifier: Modifier,
+    hasPermission: Boolean,
+    canPostPromoted: Boolean,
+    onRequestPermission: () -> Unit,
+    onOpenSettings: () -> Unit,
+    onStartFoodDelivery: () -> Unit,
+    ) {
     val navController = rememberNavController()
     var preferences = UserPreferences(LocalContext.current)
     val scope = rememberCoroutineScope()
@@ -46,7 +53,15 @@ fun NavigationStack(modifier: Modifier) {
         composable(
             route = Screen.Grow.route
         ) {
-            growYourLibraryHomepage(navController, { navController.popBackStack() }, userPreferences = preferences)
+            growYourLibraryHomepage(
+                navController, { navController.popBackStack() },
+                userPreferences = preferences,
+                hasPermission = hasPermission,
+                canPostPromoted = canPostPromoted,
+                onRequestPermission = onRequestPermission,
+                onOpenSettings = onOpenSettings,
+                onStartFoodDelivery = onStartFoodDelivery
+            )
         }
         composable("sprint20") {
             SprintStack(

@@ -10,6 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
+import kotlin.time.Duration.Companion.minutes
 
 enum class SprintDurations {
     TWENTY_MINS,
@@ -33,7 +35,9 @@ fun SprintCarousel(
 
         StartSprintCard(
             text = "20 mins",
-            onClick = { onAction(SprintDurations.TWENTY_MINS) }
+            onClick = {
+                onAction(SprintDurations.TWENTY_MINS)
+            }
         )
 
         StartSprintCard(
@@ -47,3 +51,25 @@ fun SprintCarousel(
                 )
     }
 }
+
+//fun startLiveActivity() {
+//    val liveUpdate = LiveUpdateManager.start(
+//        CountdownState(endTime)
+//    )
+//
+//    val endTime =
+//        System.currentTimeMillis() + 20.minutes.inWholeMilliseconds
+//
+//    liveUpdate.start(
+//        CountdownState(endTime)
+//    )
+//
+//    while (remaining > 0) {
+//        liveUpdate.update(
+//            CountdownState(endTime)
+//        )
+//        delay(1000)
+//    }
+//
+//    liveUpdate.end()
+//}

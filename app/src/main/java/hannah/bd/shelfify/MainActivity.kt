@@ -1,12 +1,12 @@
 package hannah.bd.shelfify
 
 import android.Manifest
-import android.R.attr.name
-import android.app.AlarmManager
-import android.content.Context
+import android.provider.Settings
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
@@ -21,9 +21,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import com.example.compose.AppTheme
 import com.hannah.shelfify.views.ghosts.ghostView
@@ -37,22 +40,98 @@ import hannah.bd.shelfify.views.homepage.backGroundView
 import hannah.bd.shelfify.views.homepage.growYourLibraryHomepage
 import hannah.bd.shelfify.views.notifications.NotificationHelper
 import hannah.bd.shelfify.views.onboarding.OnboardingOverlay
+import hannah.bd.shelfify.views.sprints.FoodDeliveryService
+import hannah.bd.shelfify.views.sprints.LiveUpdateNotificationManager
 import kotlinx.coroutines.launch
+import kotlin.jvm.java
 
 class MainActivity : ComponentActivity() {
-//    var db: AppDatabase? = null
+
+    private lateinit var notificationManager: LiveUpdateNotificationManager
+    private var hasNotificationPermission by mutableStateOf(false)
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        hasNotificationPermission = isGranted
+        if (isGranted) {
+            Toast.makeText(this, "Notification permission granted", Toast.LENGTH_SHORT).show()
+        } else { 
+            Toast.makeText(this, "Notification permission denied", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         NotificationHelper.createChannel(this)
+        notificationManager = LiveUpdateNotificationManager(this)
+        checkNotificationPermission()
+
         super.onCreate(savedInstanceState?: Bundle())
         enableEdgeToEdge()
         setContent {
             AppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    NavigationStack(modifier = Modifier.padding(innerPadding))
+                    NavigationStack(
+                        modifier = Modifier.padding(innerPadding),
+                        hasPermission = hasNotificationPermission,
+                        canPostPromoted = notificationManager.canPostPromotedNotifications(),
+                        onRequestPermission = { requestNotificationPermission() },
+                        onOpenSettings = { openNotificationSettings() },
+                        onStartFoodDelivery = { startFoodDelivery() }
+                    )
                 }
             }
         }
+    }
+
+    private fun checkNotificationPermission() {
+        hasNotificationPermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+        } else {
+            true // Permissions automatically granted on older Android versions
+        }
+    }
+
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
+
+    private fun openNotificationSettings() {
+        val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
+                putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
+            }
+        } else {
+            Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
+                putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
+            }
+        }
+        startActivity(intent)
+    }
+
+    private fun startFoodDelivery() {
+        if (!hasNotificationPermission) {
+            Toast.makeText(this, "Please grant notification permission first", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Start dedicated FoodDeliveryService
+        val intent = Intent(this, FoodDeliveryService::class.java).apply {
+            action = FoodDeliveryService.ACTION_START
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(intent)
+        } else {
+            startService(intent)
+        }
+
+        Toast.makeText(this, "Food Delivery started", Toast.LENGTH_SHORT).show()
     }
 }
 
