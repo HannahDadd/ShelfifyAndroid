@@ -23,7 +23,7 @@ import androidx.annotation.RequiresPermission
  * - Handles foreground service lifecycle
  * - Auto-stops after delivery completion
  */
-class FoodDeliveryService : Service() {
+class LiveUpdateSprintService : Service() {
 
     private lateinit var notificationManager: LiveUpdateNotificationManager
     private lateinit var deliveryHandler: FoodDeliveryServiceHandler

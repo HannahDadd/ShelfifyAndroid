@@ -40,7 +40,7 @@ import hannah.bd.shelfify.views.homepage.backGroundView
 import hannah.bd.shelfify.views.homepage.growYourLibraryHomepage
 import hannah.bd.shelfify.views.notifications.NotificationHelper
 import hannah.bd.shelfify.views.onboarding.OnboardingOverlay
-import hannah.bd.shelfify.views.sprints.FoodDeliveryService
+import hannah.bd.shelfify.views.sprints.LiveUpdateSprintService
 import hannah.bd.shelfify.views.sprints.LiveUpdateNotificationManager
 import kotlinx.coroutines.launch
 import kotlin.jvm.java
@@ -121,8 +121,8 @@ class MainActivity : ComponentActivity() {
         }
 
         // Start dedicated FoodDeliveryService
-        val intent = Intent(this, FoodDeliveryService::class.java).apply {
-            action = FoodDeliveryService.ACTION_START
+        val intent = Intent(this, LiveUpdateSprintService::class.java).apply {
+            action = LiveUpdateSprintService.ACTION_START
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -131,7 +131,7 @@ class MainActivity : ComponentActivity() {
             startService(intent)
         }
 
-        Toast.makeText(this, "Food Delivery started", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Writing sprint started", Toast.LENGTH_SHORT).show()
     }
 }
 
