@@ -26,7 +26,7 @@ import androidx.annotation.RequiresPermission
 class LiveUpdateSprintService : Service() {
 
     private lateinit var notificationManager: LiveUpdateNotificationManager
-    private lateinit var deliveryHandler: FoodDeliveryServiceHandler
+    private lateinit var deliveryHandler: WritingSprintServiceHandler
     private var isRunning = false
 
     companion object {
@@ -43,7 +43,7 @@ class LiveUpdateSprintService : Service() {
         notificationManager = LiveUpdateNotificationManager(this)
 
         // Initialize delivery handler with completion callback
-        deliveryHandler = FoodDeliveryServiceHandler(
+        deliveryHandler = WritingSprintServiceHandler(
             service = this,
             notificationManager = notificationManager,
             onComplete = {
@@ -140,7 +140,7 @@ class LiveUpdateSprintService : Service() {
  * This class encapsulates all food delivery service logic, making it
  * fully modular and reusable in other projects.
  */
-class FoodDeliveryServiceHandler(
+class WritingSprintServiceHandler(
     private val service: Service,
     private val notificationManager: LiveUpdateNotificationManager,
     private val onComplete: () -> Unit = {}  // Callback when delivery completes
