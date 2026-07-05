@@ -33,7 +33,7 @@ class LiveUpdateNotificationManager(private val context: Context) {
         const val CHANNEL_ID = "live_updates_channel"
         const val CHANNEL_NAME = "Live Updates"
 
-        const val NOTIFICATION_ID_FOOD_DELIVERY = 1005
+        const val NOTIFICATION_ID_WRITING_SPRINT = 1005
 
         // Actions
         const val ACTION_STOP = "com.kaushal.app.livenotoficationupdate.STOP"
@@ -103,7 +103,7 @@ class LiveUpdateNotificationManager(private val context: Context) {
      * - Source: https://developer.android.com/develop/ui/views/notifications/live-update#status-chips
      */
     @RequiresApi(Build.VERSION_CODES.BAKLAVA)
-    fun createFoodDeliveryNotification(
+    fun createSprintDeliveryNotification(
         orderStatus: String,
         statusText: String,
         progressValue: Int
@@ -149,7 +149,7 @@ class LiveUpdateNotificationManager(private val context: Context) {
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(smallIcon)
-            .setContentTitle("🍕 Food Delivery Order")
+            .setContentTitle("Writing Sprint")
             .setContentText(orderStatus)
             .setContentIntent(mainPendingIntent)
             .setStyle(progressStyle)
@@ -158,7 +158,7 @@ class LiveUpdateNotificationManager(private val context: Context) {
             .setOngoing(true)
             .setOnlyAlertOnce(true)
             // Status chip: Shows critical info at a glance in status bar
-            // FIXED: Use dynamic statusText instead of hardcoded "Food"
+            // FIXED: Use dynamic statusText instead of hardcoded
             .setShortCriticalText(statusText)
 
         // Add conditional actions based on delivery progress (like AOSP example)
@@ -189,7 +189,7 @@ class LiveUpdateNotificationManager(private val context: Context) {
      * For devices running Android 15 and below
      * Includes status chip support for Android 14+ (API 34+)
      */
-    fun createFoodDeliveryNotificationCompat(
+    fun createWritingSprintNotificationCompat(
         orderStatus: String,
         statusText: String,
         progress: Int

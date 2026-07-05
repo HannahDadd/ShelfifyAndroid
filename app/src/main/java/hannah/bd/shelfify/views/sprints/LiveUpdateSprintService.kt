@@ -11,18 +11,6 @@ import android.os.Looper
 import android.util.Log
 import androidx.annotation.RequiresPermission
 
-/**
- * Dedicated foreground service for food delivery tracking
- *
- * This is a completely standalone service for the food delivery module.
- * It can be copied to other projects along with the rest of the fooddelivery package.
- *
- * Features:
- * - Self-contained (no dependencies on other services)
- * - Manages food delivery Live Update notifications
- * - Handles foreground service lifecycle
- * - Auto-stops after delivery completion
- */
 class LiveUpdateSprintService : Service() {
 
     private lateinit var notificationManager: LiveUpdateNotificationManager
@@ -47,7 +35,7 @@ class LiveUpdateSprintService : Service() {
             service = this,
             notificationManager = notificationManager,
             onComplete = {
-                stopDelivery()
+                stopSprint()
             }
         )
     }
@@ -57,7 +45,7 @@ class LiveUpdateSprintService : Service() {
 
         when (intent?.action) {
             ACTION_START -> startDelivery()
-            ACTION_STOP -> stopDelivery()
+            ACTION_STOP -> stopSprint()
             else -> Log.w(TAG, "Unknown action: ${intent?.action}")
         }
 
@@ -89,16 +77,13 @@ class LiveUpdateSprintService : Service() {
 
         // Start as foreground service (REQUIRED for continuous tracking)
         startForeground(
-            LiveUpdateNotificationManager.NOTIFICATION_ID_FOOD_DELIVERY,
+            LiveUpdateNotificationManager.NOTIFICATION_ID_WRITING_SPRINT,
             notification
         )
 
     }
 
-    /**
-     * Stop food delivery tracking
-     */
-    private fun stopDelivery() {
+    private fun stopSprint() {
         if (!isRunning) {
             return
         }
@@ -182,7 +167,6 @@ class WritingSprintServiceHandler(
      * Stop food delivery tracking
      */
     fun stop() {
-        Log.d(TAG, "Stopping food delivery tracking")
         isActive = false
         foodDeliveryTracker?.stopTracking()
         foodDeliveryTracker = null
@@ -198,7 +182,7 @@ class WritingSprintServiceHandler(
 
         val notification = createNotification(state)
         notificationManager.notify(
-            LiveUpdateNotificationManager.NOTIFICATION_ID_FOOD_DELIVERY,
+            LiveUpdateNotificationManager.NOTIFICATION_ID_WRITING_SPRINT,
             notification
         )
     }
@@ -209,13 +193,13 @@ class WritingSprintServiceHandler(
      */
     private fun createNotification(state: OrderState): Notification {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA) {
-            notificationManager.createFoodDeliveryNotification(
+            notificationManager.createSprintDeliveryNotification(
                 state.orderStatus,
                 state.statusText,
                 state.progress
             )
         } else {
-            notificationManager.createFoodDeliveryNotificationCompat(
+            notificationManager.createWritingSprintNotificationCompat(
                 state.orderStatus,
                 state.statusText,
                 state.progress
@@ -239,17 +223,13 @@ class WritingSprintServiceHandler(
         handler.postDelayed({
             Log.d(TAG, "Dismissing food delivery notification")
             // Cancel the notification
-            notificationManager.cancel(LiveUpdateNotificationManager.NOTIFICATION_ID_FOOD_DELIVERY)
+            notificationManager.cancel(LiveUpdateNotificationManager.NOTIFICATION_ID_WRITING_SPRINT)
             // Notify service to stop
             onComplete()
         }, COMPLETION_DISPLAY_DURATION)
     }
 }
 
-/**
- * Tracks food delivery order progress and state transitions
- * This is a separate module that can be reused independently
- */
 class FoodDeliveryTracker(
     private val onStateChanged: (OrderState) -> Unit,
     private val onCompleted: () -> Unit
@@ -299,16 +279,6 @@ class FoodDeliveryTracker(
     }
 }
 
-
-/**
- * Represents different states in a food delivery order lifecycle
- *
- * Status Text Guidelines:
- * - Used for status chips in Live Update notifications
- * - Keep under 7 characters for full display in status bar
- * - Shows critical info at a glance when notification is collapsed
- * - Source: https://developer.android.com/develop/ui/views/notifications/live-update#status-chips
- */
 enum class OrderState(
     val progress: Int,
     val statusText: String,        // Status chip text (keep ≤7 chars for best display)
