@@ -115,8 +115,8 @@ class LiveUpdateNotificationManager(private val context: Context) {
         )
 
         // Create ProgressStyle with colored segments and milestone points
-        val pointColor = "#ECB7FF".toColorInt() // Light purple
-        val segmentColor = "#86F7FA".toColorInt() // Light cyan
+        val pointColor = "#002d04".toColorInt()
+        val segmentColor = "#06402b".toColorInt()
 
         val progressStyle = NotificationCompat.ProgressStyle()
             .setProgressSegments(
@@ -149,7 +149,7 @@ class LiveUpdateNotificationManager(private val context: Context) {
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(smallIcon)
-            .setContentTitle("Writing Sprint")
+            .setContentTitle("✍️ Focused Writing Sprint")
             .setContentText(orderStatus)
             .setContentIntent(mainPendingIntent)
             .setStyle(progressStyle)
@@ -161,18 +161,11 @@ class LiveUpdateNotificationManager(private val context: Context) {
             // FIXED: Use dynamic statusText instead of hardcoded
             .setShortCriticalText(statusText)
 
-        // Add conditional actions based on delivery progress (like AOSP example)
         when {
-            progressValue >= 90 && progressValue < 100 -> {
-                // Food arriving - add acknowledgment actions
-                builder.addAction(
-                    NotificationCompat.Action.Builder(null, "Got it", null).build()
-                )
-            }
             progressValue >= 100 -> {
                 // Order complete - add rating action
                 builder.addAction(
-                    NotificationCompat.Action.Builder(null, "Rate delivery", null).build()
+                    NotificationCompat.Action.Builder(null, "Next sprint?", null).build()
                 )
             }
         }
@@ -214,7 +207,7 @@ class LiveUpdateNotificationManager(private val context: Context) {
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(smallIcon)
-            .setContentTitle("🍕 Food Delivery Order")
+            .setContentTitle("✍️ Focused Writing Sprint")
             .setContentText(orderStatus)
             .setSubText(statusText)
             .setContentIntent(mainPendingIntent)
@@ -232,7 +225,7 @@ class LiveUpdateNotificationManager(private val context: Context) {
                 builder.addAction(
                     NotificationCompat.Action.Builder(
                         cancelIcon,
-                        "Cancel Order",
+                        "Finish Sprint",
                         cancelPendingIntent
                     ).build()
                 )

@@ -197,7 +197,6 @@ class WritingSprintServiceHandler(
      * Shows the completion state briefly, then dismisses notification and stops service
      */
     private fun complete() {
-        Log.d(TAG, "Food delivery tracking completed - will dismiss notification after ${COMPLETION_DISPLAY_DURATION}ms")
 
         // Stop tracker but keep notification visible for a moment
         isActive = false
@@ -270,6 +269,11 @@ enum class OrderState(
     val delay: Long                 // Demo timing delay in milliseconds
 ) {
     INITIALIZING(0, "Start", "Let's get ready to write...", 3000),
-    SPRINT(10, "Sprint", "Let's get those words written", 5000),
-    ORDER_COMPLETE(100, "Done", "Writing Sprint Finished - Fancy Another Sprint?", 5000)
+    SPRINT(2, "Sprint", "Let's get those words written", 2000),
+    STAGE_TWO(10, "Sprint", "Super excited to see what you write", 5000),
+    STAGE_THREE(25, "Sprint", "Keep writing! I believe in you!", 8000),           // 7 chars ✅ (shortened)
+    STAGE_FOUR(50, "Sprint", "Get those words written", 10000),         // 5 chars ✅
+    STAGE_FIVE(75, "Sprint", "Keep going, the writing sprint is nearly done", 12000),               // 6 chars ✅
+    STAGE_SIX(90, "Sprint", "Final writing push!", 8000),                    // 4 chars ✅ (shortened)
+    ORDER_COMPLETE(100, "Done", "Writing Sprint Finished - Fancy Another Sprint?", 20000)
 }
