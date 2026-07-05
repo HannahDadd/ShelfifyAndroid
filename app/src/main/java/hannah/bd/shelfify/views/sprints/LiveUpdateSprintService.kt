@@ -114,37 +114,26 @@ class LiveUpdateSprintService : Service() {
     }
 }
 
-/**
- * Service handler for food delivery tracking
- * Manages the lifecycle of food delivery Live Update notifications
- *
- * This class encapsulates all food delivery service logic, making it
- * fully modular and reusable in other projects.
- */
 class WritingSprintServiceHandler(
     private val service: Service,
     private val notificationManager: LiveUpdateNotificationManager,
     private val onComplete: () -> Unit = {}  // Callback when delivery completes
 ) {
-    private var foodDeliveryTracker: FoodDeliveryTracker? = null
+    private var writingSprintTracker: WritingSprintTracker? = null
     private var isActive = false
     private val handler = Handler(Looper.getMainLooper())
 
     companion object {
-        private const val TAG = "FoodDeliveryHandler"
+        private const val TAG = "WritingSprintHandler"
         private const val COMPLETION_DISPLAY_DURATION = 3000L // Show completion for 3 seconds
     }
 
-    /**
-     * Start food delivery tracking
-     * @return Initial notification to start foreground service with
-     */
     fun start(): Notification {
-        Log.d(TAG, "Starting food delivery tracking")
+        Log.d(TAG, "Starting writing sprint tracking")
         isActive = true
 
         // Initialize the tracker with callbacks
-        foodDeliveryTracker = FoodDeliveryTracker(
+        writingSprintTracker = WritingSprintTracker(
             onStateChanged = { state -> updateNotification(state) },
             onCompleted = { complete() }
         )
@@ -154,7 +143,7 @@ class WritingSprintServiceHandler(
         val notification = createNotification(firstState)
 
         // Start the tracker
-        foodDeliveryTracker?.startTracking()
+        writingSprintTracker?.startTracking()
 
         return notification
     }
@@ -164,8 +153,8 @@ class WritingSprintServiceHandler(
      */
     fun stop() {
         isActive = false
-        foodDeliveryTracker?.stopTracking()
-        foodDeliveryTracker = null
+        writingSprintTracker?.stopTracking()
+        writingSprintTracker = null
         handler.removeCallbacksAndMessages(null)
     }
 
@@ -212,12 +201,11 @@ class WritingSprintServiceHandler(
 
         // Stop tracker but keep notification visible for a moment
         isActive = false
-        foodDeliveryTracker?.stopTracking()
-        foodDeliveryTracker = null
+        writingSprintTracker?.stopTracking()
+        writingSprintTracker = null
 
         // Schedule notification dismissal and service stop
         handler.postDelayed({
-            Log.d(TAG, "Dismissing food delivery notification")
             // Cancel the notification
             notificationManager.cancel(LiveUpdateNotificationManager.NOTIFICATION_ID_WRITING_SPRINT)
             // Notify service to stop
@@ -226,7 +214,7 @@ class WritingSprintServiceHandler(
     }
 }
 
-class FoodDeliveryTracker(
+class WritingSprintTracker(
     private val onStateChanged: (OrderState) -> Unit,
     private val onCompleted: () -> Unit
 ) {
