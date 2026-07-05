@@ -51,9 +51,6 @@ class LiveUpdateSprintService : Service() {
         return START_NOT_STICKY  // Don't restart if killed
     }
 
-    /**
-     * Start food delivery tracking
-     */
     private fun startDelivery() {
         if (isRunning) {
             return
