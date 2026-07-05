@@ -18,10 +18,9 @@ class LiveUpdateSprintService : Service() {
     private var isRunning = false
 
     companion object {
-        private const val TAG = "FoodDeliveryService"
-        // Action to start food delivery tracking
-        const val ACTION_START = "com.kaushal.app.livenotoficationupdate.fooddelivery.START"
-        const val ACTION_STOP = "com.kaushal.app.livenotoficationupdate.fooddelivery.STOP"
+        private const val TAG = "WritingSprintService"
+        const val ACTION_START = "hannah.bd.shelfify.livenotificationupdate.writingsprint.START"
+        const val ACTION_STOP = "hannah.bd.shelfify.livenotoficationupdate.writingsprint.STOP"
     }
 
     override fun onCreate() {
