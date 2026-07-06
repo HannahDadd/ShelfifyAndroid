@@ -91,19 +91,8 @@ class LiveUpdateNotificationManager(private val context: Context) {
         NotificationManagerCompat.from(context).cancel(notificationId)
     }
 
-
-    /**
-     * Create a food delivery Live Update notification with ProgressStyle (Android 16+)
-     * Uses new ProgressStyle API with segments and milestone points
-     * Includes status chip with current order state
-     *
-     * Status Chips:
-     * - Show critical information at a glance in status bar
-     * - Best practice: Keep text under 7 characters for full display
-     * - Source: https://developer.android.com/develop/ui/views/notifications/live-update#status-chips
-     */
     @RequiresApi(Build.VERSION_CODES.BAKLAVA)
-    fun createSprintDeliveryNotification(
+    fun createWritingSprintNotification(
         orderStatus: String,
         statusText: String,
         progressValue: Int
@@ -230,16 +219,10 @@ class LiveUpdateNotificationManager(private val context: Context) {
                     ).build()
                 )
             }
-            progress >= 90 && progress < 100 -> {
-                // Food arriving - add acknowledgment action
-                builder.addAction(
-                    NotificationCompat.Action.Builder(null, "Got it", null).build()
-                )
-            }
             progress >= 100 -> {
                 // Order complete - add rating action
                 builder.addAction(
-                    NotificationCompat.Action.Builder(null, "Rate delivery", null).build()
+                    NotificationCompat.Action.Builder(null, "Start another sprint", null).build()
                 )
             }
         }

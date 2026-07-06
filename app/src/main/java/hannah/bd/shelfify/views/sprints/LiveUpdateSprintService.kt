@@ -178,7 +178,7 @@ class WritingSprintServiceHandler(
      */
     private fun createNotification(state: OrderState): Notification {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA) {
-            notificationManager.createSprintDeliveryNotification(
+            notificationManager.createWritingSprintNotification(
                 state.orderStatus,
                 state.statusText,
                 state.progress
