@@ -77,7 +77,7 @@ class MainActivity : ComponentActivity() {
                         canPostPromoted = notificationManager.canPostPromotedNotifications(),
                         onRequestPermission = { requestNotificationPermission() },
                         onOpenSettings = { openNotificationSettings() },
-                        onStartFoodDelivery = { startFoodDelivery() }
+                        onStartFoodDelivery = { startWritingSprint() }
                     )
                 }
             }
@@ -114,13 +114,12 @@ class MainActivity : ComponentActivity() {
         startActivity(intent)
     }
 
-    private fun startFoodDelivery() {
+    private fun startWritingSprint() {
         if (!hasNotificationPermission) {
             Toast.makeText(this, "Please grant notification permission first", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Start dedicated FoodDeliveryService
         val intent = Intent(this, LiveUpdateSprintService::class.java).apply {
             action = LiveUpdateSprintService.ACTION_START
         }
