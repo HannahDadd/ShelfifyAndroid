@@ -62,10 +62,10 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState?: Bundle())
         NotificationHelper.createChannel(this)
         notificationManager = LiveUpdateNotificationManager(this)
         checkNotificationPermission()
+        super.onCreate(savedInstanceState?: Bundle())
 
         enableEdgeToEdge()
         setContent {
@@ -135,7 +135,9 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun AppMainPage(navController: NavController, userPreferences: UserPreferences) {
+fun AppMainPage(navController: NavController,
+                userPreferences: UserPreferences,
+                onRequestPermission: () -> Unit,) {
 
     val scope = rememberCoroutineScope()
     val hasSeenOnboarding by userPreferences
@@ -160,6 +162,7 @@ fun AppMainPage(navController: NavController, userPreferences: UserPreferences) 
                 onFinished = {
                     scope.launch {
                         userPreferences.completeOnboarding()
+                        onRequestPermission()
                     }
                 }
             )

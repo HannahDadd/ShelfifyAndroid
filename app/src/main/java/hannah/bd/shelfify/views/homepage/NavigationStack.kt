@@ -48,7 +48,7 @@ fun NavigationStack(
 
     NavHost(navController = navController, startDestination = Screen.Main.route) {
         composable(route = Screen.Main.route) {
-            AppMainPage(navController = navController, preferences)
+            AppMainPage(navController = navController, preferences, onRequestPermission = onRequestPermission)
         }
         composable(
             route = Screen.Grow.route
