@@ -62,11 +62,11 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState?: Bundle())
         NotificationHelper.createChannel(this)
         notificationManager = LiveUpdateNotificationManager(this)
         checkNotificationPermission()
 
-        super.onCreate(savedInstanceState?: Bundle())
         enableEdgeToEdge()
         setContent {
             AppTheme {
