@@ -58,7 +58,6 @@ fun NavigationStack(
                 userPreferences = preferences,
                 hasPermission = hasPermission,
                 canPostPromoted = canPostPromoted,
-                onRequestPermission = onRequestPermission,
                 onOpenSettings = onOpenSettings,
                 onStartFoodDelivery = onStartFoodDelivery
             )

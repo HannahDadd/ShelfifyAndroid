@@ -148,9 +148,6 @@ class WritingSprintServiceHandler(
         return notification
     }
 
-    /**
-     * Stop food delivery tracking
-     */
     fun stop() {
         isActive = false
         writingSprintTracker?.stopTracking()
@@ -158,9 +155,6 @@ class WritingSprintServiceHandler(
         handler.removeCallbacksAndMessages(null)
     }
 
-    /**
-     * Update notification with new state
-     */
     @RequiresPermission(Manifest.permission.POST_NOTIFICATIONS)
     private fun updateNotification(state: OrderState) {
         if (!isActive) return
@@ -172,10 +166,6 @@ class WritingSprintServiceHandler(
         )
     }
 
-    /**
-     * Create notification for given order state
-     * Now uses LiveUpdateNotificationManager (combined from helper)
-     */
     private fun createNotification(state: OrderState): Notification {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA) {
             notificationManager.createWritingSprintNotification(
@@ -192,10 +182,6 @@ class WritingSprintServiceHandler(
         }
     }
 
-    /**
-     * Handle completion callback
-     * Shows the completion state briefly, then dismisses notification and stops service
-     */
     private fun complete() {
 
         // Stop tracker but keep notification visible for a moment

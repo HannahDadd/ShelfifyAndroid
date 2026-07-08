@@ -34,7 +34,6 @@ import hannah.bd.shelfify.R
 import hannah.bd.shelfify.modals.UserPreferences
 import hannah.bd.shelfify.views.notifications.DailyReminderButton
 import hannah.bd.shelfify.views.sprints.LiveUpdateCard
-import hannah.bd.shelfify.views.sprints.PermissionStatusCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,7 +43,6 @@ fun growYourLibraryHomepage(
     userPreferences: UserPreferences,
     hasPermission: Boolean,
     canPostPromoted: Boolean,
-    onRequestPermission: () -> Unit,
     onOpenSettings: () -> Unit,
     onStartFoodDelivery: () -> Unit,
 ) {
@@ -91,16 +89,6 @@ fun growYourLibraryHomepage(
                             SprintDurations.FORTY_MINS -> navController.navigate("sprint40")
                             SprintDurations.ONE_HOUR -> navController.navigate("sprint60")
                         }
-                    }
-                }
-                item {
-                    Column(modifier = Modifier.padding(8.dp)) {
-                        PermissionStatusCard(
-                            hasPermission = hasPermission,
-                            canPostPromoted = canPostPromoted,
-                            onRequestPermission = onRequestPermission,
-                            onOpenSettings = onOpenSettings
-                        )
                     }
                 }
                 item {
