@@ -76,7 +76,7 @@ fun Sprint(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Sprint Time Remaining (minutes):",
+                text = "Sprint Time Remaining:",
                 color = Color.White,
                 fontFamily = FontFamily(Font(R.font.bellefairregularfont)),
                 fontSize = 20.sp
