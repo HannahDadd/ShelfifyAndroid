@@ -10,8 +10,8 @@ enum class OrderState(
 ) {
     INITIALIZING(0, "Start", "Get ready to write...", 2000, 2000, 2000),
     SPRINT_ZERO(2, "Sprint", "Let's get writing!", 2000, 2000, 2000),
-    SPRINT_ONE(10, "Sprint", "Let's get writing!", 120000, 240000, 360000),
-    SPRINT(20, "Sprint", "Get those words written", 120000, 240000, 360000),
+    SPRINT(10, "Sprint", "Let's get writing!", 120000, 240000, 360000),
+    SPRINT_ONE(20, "Sprint", "Get those words written", 120000, 240000, 360000),
     STAGE_TWO(30, "Sprint", "Keep going!", 120000, 240000, 360000),
     STAGE_THREE(40, "Sprint", "Keep writing!", 120000, 240000, 360000),
     STAGE_FOUR(50, "Sprint", "Get those words written", 120000, 240000, 360000),
