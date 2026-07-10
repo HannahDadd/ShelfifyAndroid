@@ -40,8 +40,8 @@ import hannah.bd.shelfify.views.homepage.backGroundView
 import hannah.bd.shelfify.views.homepage.growYourLibraryHomepage
 import hannah.bd.shelfify.views.notifications.NotificationHelper
 import hannah.bd.shelfify.views.onboarding.OnboardingOverlay
-import hannah.bd.shelfify.views.sprints.LiveUpdateSprintService
-import hannah.bd.shelfify.views.sprints.LiveUpdateNotificationManager
+import hannah.bd.shelfify.views.sprints.liveUpdate.LiveUpdateSprintService
+import hannah.bd.shelfify.views.sprints.liveUpdate.LiveUpdateNotificationManager
 import kotlinx.coroutines.launch
 import kotlin.jvm.java
 

@@ -1,4 +1,4 @@
-package hannah.bd.shelfify.views.sprints
+package hannah.bd.shelfify.views.sprints.liveUpdate
 
 import android.Manifest
 import android.app.Notification

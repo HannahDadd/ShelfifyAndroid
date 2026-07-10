@@ -32,7 +32,7 @@
             android:name=".views.notifications.DailyNotificationReceiver"
             android:exported="false" />
         <service
-            android:name=".views.sprints.LiveUpdateSprintService"
+            android:name=".views.sprints.liveUpdate.LiveUpdateSprintService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="specialUse">
