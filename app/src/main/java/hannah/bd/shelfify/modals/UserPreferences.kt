@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.google.android.datatransport.runtime.dagger.Provides
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -13,9 +14,9 @@ object PreferencesKeys {
     val WORDS_WRITTEN = intPreferencesKey("words_written")
 }
 
-class UserPreferences(private val context: Context) {
+private val Context.dataStore by preferencesDataStore("settings")
 
-    private val Context.dataStore by preferencesDataStore("settings")
+class UserPreferences(private val context: Context) {
 
     val hasSeenOnboarding: Flow<Boolean> =
         context.dataStore.data.map {

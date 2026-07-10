@@ -9,10 +9,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,13 +33,19 @@ import hannah.bd.getitwrite.views.sprints.SprintDurations
 import hannah.bd.shelfify.R
 import hannah.bd.shelfify.modals.UserPreferences
 import hannah.bd.shelfify.views.notifications.DailyReminderButton
+import hannah.bd.shelfify.views.sprints.LiveUpdateCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun growYourLibraryHomepage(
     navController: NavController,
     navigateBack: () -> Unit,
-    userPreferences: UserPreferences
+    userPreferences: UserPreferences,
+    hasPermission: Boolean,
+    canPostPromoted: Boolean,
+    startTwentyMinsActivity: () -> Unit,
+    startFortyMinsActivity: () -> Unit,
+    startSixtyMinsActivity: () -> Unit,
 ) {
     val wordsWritten by userPreferences
         .wordsWritten
@@ -78,9 +86,18 @@ fun growYourLibraryHomepage(
                 item {
                     SprintCarousel { sprintDurations ->
                         when (sprintDurations) {
-                            SprintDurations.TWENTY_MINS -> navController.navigate("sprint20")
-                            SprintDurations.FORTY_MINS -> navController.navigate("sprint40")
-                            SprintDurations.ONE_HOUR -> navController.navigate("sprint60")
+                            SprintDurations.TWENTY_MINS -> {
+                                startTwentyMinsActivity()
+                                navController.navigate("sprint20")
+                            }
+                            SprintDurations.FORTY_MINS -> {
+                                startFortyMinsActivity
+                                navController.navigate("sprint40")
+                            }
+                            SprintDurations.ONE_HOUR -> {
+                                startSixtyMinsActivity()
+                                navController.navigate("sprint60")
+                            }
                         }
                     }
                 }
