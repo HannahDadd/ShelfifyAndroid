@@ -41,7 +41,23 @@ class WritingSprintTracker(
                 onStateChanged(state)
                 currentOrderState++
                 scheduleNextUpdate()
-            }, state.delay)
+            }, state.delayTwenty)
+        }
+
+        if (delayLength == "40mins") {
+            handler.postDelayed({
+                onStateChanged(state)
+                currentOrderState++
+                scheduleNextUpdate()
+            }, state.delayForty)
+        }
+
+        if (delayLength == "60mins") {
+            handler.postDelayed({
+                onStateChanged(state)
+                currentOrderState++
+                scheduleNextUpdate()
+            }, state.delaySixty)
         }
     }
 
@@ -57,16 +73,22 @@ class WritingSprintTracker(
 
 enum class OrderState(
     val progress: Int,
-    val statusText: String,        // Status chip text (keep ≤7 chars for best display)
-    val orderStatus: String,        // Full notification content text
-    val delay: Long                 // Demo timing delay in milliseconds
+    val statusText: String,
+    val orderStatus: String,
+    val delayTwenty: Long,
+    val delayForty: Long,
+    val delaySixty: Long
 ) {
-    INITIALIZING(0, "Start", "Let's get ready to write...", 3000),
-    SPRINT(2, "Sprint", "Let's get those words written", 2000),
-    STAGE_TWO(10, "Sprint", "Super excited to see what you write", 5000),
-    STAGE_THREE(25, "Sprint", "Keep writing! I believe in you!", 8000),           // 7 chars ✅ (shortened)
-    STAGE_FOUR(50, "Sprint", "Get those words written", 10000),         // 5 chars ✅
-    STAGE_FIVE(75, "Sprint", "Keep going, the writing sprint is nearly done", 12000),               // 6 chars ✅
-    STAGE_SIX(90, "Sprint", "Final writing push!", 8000),                    // 4 chars ✅ (shortened)
-    ORDER_COMPLETE(100, "Done", "Writing Sprint Finished - Fancy Another Sprint?", 20000)
+    INITIALIZING(0, "Start", "Get ready to write...", 2000, 2000, 2000),
+    SPRINT_ZERO(2, "Start", "Let's get writing!", 2000, 2000, 2000),
+    SPRINT_ONE(10, "Start", "Let's get writing!", 120000, 240000, 360000),
+    SPRINT(20, "Sprint", "Get those words written", 120000, 240000, 360000),
+    STAGE_TWO(30, "Sprint", "Keep going!", 120000, 240000, 360000),
+    STAGE_THREE(40, "Sprint", "Keep writing!", 120000, 240000, 360000),
+    STAGE_FOUR(50, "Sprint", "Get those words written", 120000, 240000, 360000),
+    STAGE_FIVE(60, "Sprint", "That's over half the writing sprint finished", 120000, 240000, 360000),
+    STAGE_SIX(70, "Sprint", "Keep writing!", 120000, 240000, 360000),
+    STAGE_SEVEN(80, "Sprint", "Keep going, the writing sprint is nearly done", 120000, 240000, 360000),
+    STAGE_EIGHT(90, "Sprint", "Final writing push!", 120000, 240000, 360000),
+    ORDER_COMPLETE(100, "Done", "Writing Sprint Finished - Fancy Another Sprint?", 120000, 240000, 360000)
 }
