@@ -80,7 +80,9 @@ fun growYourLibraryHomepage(
                 item {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text("Words written in the app: ${ wordsWritten }",
-                                fontFamily = FontFamily(Font(R.font.bellefairregularfont)),)
+                                fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
+                        Text("Library completes at 100k words.",
+                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)),)
                     }
                 }
                 item {
