@@ -39,8 +39,9 @@ fun NavigationStack(
     hasPermission: Boolean,
     canPostPromoted: Boolean,
     onRequestPermission: () -> Unit,
-    onOpenSettings: () -> Unit,
-    onStartFoodDelivery: () -> Unit,
+    startTwentyMinsActivity: () -> Unit,
+    startFortyMinsActivity: () -> Unit,
+    startSixtyMinsActivity: () -> Unit,
     ) {
     val navController = rememberNavController()
     var preferences = UserPreferences(LocalContext.current)
@@ -58,8 +59,9 @@ fun NavigationStack(
                 userPreferences = preferences,
                 hasPermission = hasPermission,
                 canPostPromoted = canPostPromoted,
-                onOpenSettings = onOpenSettings,
-                onStartFoodDelivery = onStartFoodDelivery
+                startTwentyMinsActivity = startTwentyMinsActivity,
+                startFortyMinsActivity = startFortyMinsActivity,
+                startSixtyMinsActivity = startSixtyMinsActivity,
             )
         }
         composable("sprint20") {

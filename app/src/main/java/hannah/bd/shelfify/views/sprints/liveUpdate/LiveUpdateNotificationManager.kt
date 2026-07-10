@@ -207,26 +207,6 @@ class LiveUpdateNotificationManager(private val context: Context) {
             .setOnlyAlertOnce(true)
             .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
 
-        // Add conditional actions based on delivery progress
-        when {
-            progress < 90 -> {
-                // Show cancel option before delivery arrives
-                builder.addAction(
-                    NotificationCompat.Action.Builder(
-                        cancelIcon,
-                        "Finish Sprint",
-                        cancelPendingIntent
-                    ).build()
-                )
-            }
-            progress >= 100 -> {
-                // Order complete - add rating action
-                builder.addAction(
-                    NotificationCompat.Action.Builder(null, "Start another sprint", null).build()
-                )
-            }
-        }
-
         val notification = builder.build()
 
         // Request promotion to Live Update

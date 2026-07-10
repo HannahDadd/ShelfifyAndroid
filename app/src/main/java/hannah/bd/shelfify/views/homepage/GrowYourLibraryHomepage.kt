@@ -43,8 +43,9 @@ fun growYourLibraryHomepage(
     userPreferences: UserPreferences,
     hasPermission: Boolean,
     canPostPromoted: Boolean,
-    onOpenSettings: () -> Unit,
-    onStartFoodDelivery: () -> Unit,
+    startTwentyMinsActivity: () -> Unit,
+    startFortyMinsActivity: () -> Unit,
+    startSixtyMinsActivity: () -> Unit,
 ) {
     val wordsWritten by userPreferences
         .wordsWritten
@@ -85,22 +86,20 @@ fun growYourLibraryHomepage(
                 item {
                     SprintCarousel { sprintDurations ->
                         when (sprintDurations) {
-                            SprintDurations.TWENTY_MINS -> navController.navigate("sprint20")
-                            SprintDurations.FORTY_MINS -> navController.navigate("sprint40")
-                            SprintDurations.ONE_HOUR -> navController.navigate("sprint60")
+                            SprintDurations.TWENTY_MINS -> {
+                                startTwentyMinsActivity()
+                                navController.navigate("sprint20")
+                            }
+                            SprintDurations.FORTY_MINS -> {
+                                startFortyMinsActivity
+                                navController.navigate("sprint40")
+                            }
+                            SprintDurations.ONE_HOUR -> {
+                                startSixtyMinsActivity()
+                                navController.navigate("sprint60")
+                            }
                         }
                     }
-                }
-                item {
-                    LiveUpdateCard(
-                        title = "🍕 Food Delivery Tracking",
-                        description = "Track your order with ProgressStyle milestones (Android 16+)",
-                        icon = Icons.Default.ShoppingCart,
-                        onClick = onStartFoodDelivery,
-                        enabled = hasPermission,
-                        color = MaterialTheme.colorScheme.primaryContainer,
-                        isNew = true
-                    )
                 }
                 item {
                     Column(modifier = Modifier.padding(8.dp)) {

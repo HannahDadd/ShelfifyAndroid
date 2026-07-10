@@ -76,8 +76,9 @@ class MainActivity : ComponentActivity() {
                         hasPermission = hasNotificationPermission,
                         canPostPromoted = notificationManager.canPostPromotedNotifications(),
                         onRequestPermission = { requestNotificationPermission() },
-                        onOpenSettings = { openNotificationSettings() },
-                        onStartFoodDelivery = { startWritingSprint() }
+                        startTwentyMinsActivity = { startWritingSprint("20mins") },
+                        startFortyMinsActivity = { startWritingSprint("40mins") },
+                        startSixtyMinsActivity = { startWritingSprint("60mins") }
                     )
                 }
             }
@@ -114,7 +115,7 @@ class MainActivity : ComponentActivity() {
         startActivity(intent)
     }
 
-    private fun startWritingSprint() {
+    private fun startWritingSprint(delayLength: String) {
         if (!hasNotificationPermission) {
             Toast.makeText(this, "Please grant notification permission first", Toast.LENGTH_SHORT).show()
             return
@@ -123,7 +124,7 @@ class MainActivity : ComponentActivity() {
         val intent = Intent(this, LiveUpdateSprintService::class.java).apply {
             action = LiveUpdateSprintService.ACTION_START
         }
-        intent.putExtra("delayLength", "20mins")
+        intent.putExtra("delayLength", delayLength)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(intent)

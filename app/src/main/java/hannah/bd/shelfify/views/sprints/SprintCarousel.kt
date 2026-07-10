@@ -51,25 +51,3 @@ fun SprintCarousel(
                 )
     }
 }
-
-//fun startLiveActivity() {
-//    val liveUpdate = LiveUpdateManager.start(
-//        CountdownState(endTime)
-//    )
-//
-//    val endTime =
-//        System.currentTimeMillis() + 20.minutes.inWholeMilliseconds
-//
-//    liveUpdate.start(
-//        CountdownState(endTime)
-//    )
-//
-//    while (remaining > 0) {
-//        liveUpdate.update(
-//            CountdownState(endTime)
-//        )
-//        delay(1000)
-//    }
-//
-//    liveUpdate.end()
-//}
