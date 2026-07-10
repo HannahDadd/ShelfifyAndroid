@@ -12,7 +12,7 @@ import androidx.annotation.RequiresPermission
 class WritingSprintServiceHandler(
     private val service: Service,
     private val notificationManager: LiveUpdateNotificationManager,
-    private val onComplete: () -> Unit = {}  // Callback when delivery completes
+    private val onComplete: () -> Unit = {}
 ) {
     private var writingSprintTracker: WritingSprintTracker? = null
     private var isActive = false
@@ -23,12 +23,13 @@ class WritingSprintServiceHandler(
         private const val COMPLETION_DISPLAY_DURATION = 3000L // Show completion for 3 seconds
     }
 
-    fun start(): Notification {
+    fun start(delayLength: String): Notification {
         Log.d(TAG, "Starting writing sprint tracking")
         isActive = true
 
         // Initialize the tracker with callbacks
         writingSprintTracker = WritingSprintTracker(
+            delayLength = delayLength,
             onStateChanged = { state -> updateNotification(state) },
             onCompleted = { complete() }
         )

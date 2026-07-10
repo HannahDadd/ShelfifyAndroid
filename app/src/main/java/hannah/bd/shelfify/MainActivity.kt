@@ -123,6 +123,7 @@ class MainActivity : ComponentActivity() {
         val intent = Intent(this, LiveUpdateSprintService::class.java).apply {
             action = LiveUpdateSprintService.ACTION_START
         }
+        intent.putExtra("delayLength", "20mins")
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(intent)

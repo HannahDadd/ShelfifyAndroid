@@ -33,7 +33,7 @@ class LiveUpdateSprintService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
         when (intent?.action) {
-            ACTION_START -> startDelivery()
+            ACTION_START -> startDelivery(intent.getStringExtra("delayLength") ?: "")
             ACTION_STOP -> stopSprint()
             else -> Log.w(TAG, "Unknown action: ${intent?.action}")
         }
@@ -41,14 +41,14 @@ class LiveUpdateSprintService : Service() {
         return START_NOT_STICKY  // Don't restart if killed
     }
 
-    private fun startDelivery() {
+    private fun startDelivery(delayLength: String) {
         if (isRunning) {
             return
         }
 
         val canPostPromoted = notificationManager.canPostPromotedNotifications()
         isRunning = true
-        val notification = deliveryHandler.start()
+        val notification = deliveryHandler.start(delayLength)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA) {
             val hasPromotable = notification.hasPromotableCharacteristics()

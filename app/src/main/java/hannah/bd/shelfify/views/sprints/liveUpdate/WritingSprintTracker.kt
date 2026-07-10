@@ -4,6 +4,7 @@ import android.os.Handler
 import android.os.Looper
 
 class WritingSprintTracker(
+    private val delayLength: String,
     private val onStateChanged: (OrderState) -> Unit,
     private val onCompleted: () -> Unit
 ) {
@@ -35,11 +36,13 @@ class WritingSprintTracker(
 
         val state = orderStates[currentOrderState]
 
-        handler.postDelayed({
-            onStateChanged(state)
-            currentOrderState++
-            scheduleNextUpdate()
-        }, state.delay)
+        if (delayLength == "20mins") {
+            handler.postDelayed({
+                onStateChanged(state)
+                currentOrderState++
+                scheduleNextUpdate()
+            }, state.delay)
+        }
     }
 
     fun getCurrentState(): OrderState? {
