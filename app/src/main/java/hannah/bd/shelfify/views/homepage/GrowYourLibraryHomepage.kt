@@ -88,6 +88,9 @@ fun growYourLibraryHomepage(
                 item {
                     SprintCarousel { sprintDurations ->
                         when (sprintDurations) {
+                            SprintDurations.FIVE_SECS -> {
+                                navController.navigate("sprint5")
+                            }
                             SprintDurations.TWENTY_MINS -> {
                                 startTwentyMinsActivity()
                                 navController.navigate("sprint20")

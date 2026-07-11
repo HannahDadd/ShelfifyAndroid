@@ -64,6 +64,16 @@ fun NavigationStack(
                 startSixtyMinsActivity = startSixtyMinsActivity,
             )
         }
+        composable("sprint5") {
+            SprintStack(
+                onFinish = {
+                    scope.launch {
+                        preferences.updateWordCount(it)
+                    }
+                    navController.popBackStack()
+                }, (5)
+            )
+        }
         composable("sprint20") {
             SprintStack(
                 onFinish = {
