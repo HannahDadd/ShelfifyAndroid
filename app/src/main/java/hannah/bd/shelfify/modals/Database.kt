@@ -1,5 +1,10 @@
-//import androidx.room3.RoomDatabase
-//
-//abstract class AppDatabase : RoomDatabase() {
-//    abstract fun wordsDao(): Int
-//}
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+
+@Database(entities = [Stat::class, WIP::class], version = 1)
+@TypeConverters(Converters::class)
+abstract class AppDatabase : RoomDatabase() {
+    abstract fun statDao(): StatDao
+    abstract fun wipDao(): WIPDao
+}
