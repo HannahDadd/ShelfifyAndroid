@@ -149,6 +149,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AppMainPage(navController: NavController,
                 userPreferences: UserPreferences,
+                db: AppDatabase?,
                 onRequestPermission: () -> Unit,) {
 
     val scope = rememberCoroutineScope()
@@ -168,6 +169,7 @@ fun AppMainPage(navController: NavController,
         MenuView(
             { navController.navigate(Screen.Grow.route)},
             { navController.navigate(Screen.Stats.route)},
+            db,
             navController = navController)
         ghostView()
 

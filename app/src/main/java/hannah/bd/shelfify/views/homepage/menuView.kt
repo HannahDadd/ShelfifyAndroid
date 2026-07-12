@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -21,6 +22,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import hannah.bd.shelfify.R
+import hannah.bd.shelfify.modals.AppDatabase
+import hannah.bd.shelfify.modals.Stat
 import hannah.bd.shelfify.views.settings.settingsView
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -28,8 +31,10 @@ import hannah.bd.shelfify.views.settings.settingsView
 fun MenuView(
     growAction: () -> Unit,
     statsAction: () -> Unit,
+    db: AppDatabase?,
     navController: NavController
 ) {
+    var stats by remember { mutableStateOf(listOf<Stat>()) }
 
     var showButtons by remember {
         mutableStateOf(false)
@@ -40,6 +45,13 @@ fun MenuView(
     }
 
     val buttonSize = 75.dp
+
+    LaunchedEffect(Unit) {
+
+        db?.let {
+            stats = db.statDao().getAll()
+        }
+    }
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -55,16 +67,6 @@ fun MenuView(
             if (showButtons) {
 
                 Image(
-                    painter = painterResource(R.drawable.graphbtn),
-                    contentDescription = "Statistics",
-                    modifier = Modifier
-                        .size(buttonSize)
-                        .clickable {
-                            statsAction()
-                        }
-                )
-
-                Image(
                     painter = painterResource(R.drawable.growbtn),
                     contentDescription = "Grow your library",
                     modifier = Modifier
@@ -73,6 +75,18 @@ fun MenuView(
                             growAction()
                         }
                 )
+
+                if (stats.size > 2) {
+                    Image(
+                        painter = painterResource(R.drawable.graphbtn),
+                        contentDescription = "Statistics",
+                        modifier = Modifier
+                            .size(buttonSize)
+                            .clickable {
+                                statsAction()
+                            }
+                    )
+                }
 
                 Image(
                     painter = painterResource(R.drawable.settingsbtn),

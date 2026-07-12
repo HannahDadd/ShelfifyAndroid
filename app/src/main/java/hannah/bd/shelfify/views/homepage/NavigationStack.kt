@@ -54,13 +54,18 @@ fun NavigationStack(
 
     NavHost(navController = navController, startDestination = Screen.Main.route) {
         composable(route = Screen.Main.route) {
-            AppMainPage(navController = navController, preferences, onRequestPermission = onRequestPermission)
+            AppMainPage(
+                navController = navController,
+                preferences,
+                db,
+                onRequestPermission = onRequestPermission)
         }
         composable(
             route = Screen.Grow.route
         ) {
             growYourLibraryHomepage(
-                navController, { navController.popBackStack() },
+                navController,
+                { navController.popBackStack() },
                 userPreferences = preferences,
                 hasPermission = hasPermission,
                 canPostPromoted = canPostPromoted,
@@ -72,7 +77,11 @@ fun NavigationStack(
         composable(
             route = Screen.Stats.route
         ) {
-            GraphForWriter(db)
+            GraphForWriter(
+                navigateBack = { navController.popBackStack() },
+                db,
+                userPreferences = preferences,
+            )
         }
         composable("sprint5") {
             SprintStack(
