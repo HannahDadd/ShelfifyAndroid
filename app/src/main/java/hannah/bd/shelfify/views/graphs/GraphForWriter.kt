@@ -1,6 +1,5 @@
 package hannah.bd.shelfify.views.graphs
 
-import AppDatabase
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,6 +30,7 @@ import com.aay.compose.lineChart.LineChart
 import com.aay.compose.lineChart.model.LineParameters
 import com.aay.compose.lineChart.model.LineType
 import hannah.bd.shelfify.R
+import hannah.bd.shelfify.modals.AppDatabase
 import hannah.bd.shelfify.modals.Stat
 
 @Composable

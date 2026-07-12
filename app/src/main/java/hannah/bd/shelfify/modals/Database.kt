@@ -1,3 +1,5 @@
+package hannah.bd.shelfify.modals
+
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters

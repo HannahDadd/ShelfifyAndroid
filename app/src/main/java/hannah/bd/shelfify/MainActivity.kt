@@ -1,6 +1,7 @@
 package hannah.bd.shelfify
 
 import android.Manifest
+import android.app.Activity
 import android.provider.Settings
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -28,8 +29,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.room.Room
 import com.example.compose.AppTheme
 import com.hannah.shelfify.views.ghosts.ghostView
+import hannah.bd.shelfify.modals.AppDatabase
 import hannah.bd.shelfify.modals.UserPreferences
 import hannah.bd.shelfify.modals.onboardingPages
 import hannah.bd.shelfify.views.homepage.LibraryView
@@ -46,6 +50,7 @@ import kotlinx.coroutines.launch
 import kotlin.jvm.java
 
 class MainActivity : ComponentActivity() {
+    var db: AppDatabase? = null
 
     private lateinit var notificationManager: LiveUpdateNotificationManager
     private var hasNotificationPermission by mutableStateOf(false)
@@ -65,7 +70,11 @@ class MainActivity : ComponentActivity() {
         NotificationHelper.createChannel(this)
         notificationManager = LiveUpdateNotificationManager(this)
         checkNotificationPermission()
-        super.onCreate(savedInstanceState?: Bundle())
+        super.onCreate(savedInstanceState)
+        db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "database-name"
+        ).allowMainThreadQueries().build()
 
         enableEdgeToEdge()
         setContent {
@@ -78,7 +87,8 @@ class MainActivity : ComponentActivity() {
                         onRequestPermission = { requestNotificationPermission() },
                         startTwentyMinsActivity = { startWritingSprint("20mins") },
                         startFortyMinsActivity = { startWritingSprint("40mins") },
-                        startSixtyMinsActivity = { startWritingSprint("60mins") }
+                        startSixtyMinsActivity = { startWritingSprint("60mins") },
+                        db
                     )
                 }
             }

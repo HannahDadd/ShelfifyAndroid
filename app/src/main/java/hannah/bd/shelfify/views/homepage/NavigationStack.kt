@@ -19,8 +19,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.room.Room
 import hannah.bd.getitwrite.views.sprints.SprintStack
 import hannah.bd.shelfify.AppMainPage
+import hannah.bd.shelfify.modals.AppDatabase
 import hannah.bd.shelfify.modals.UserPreferences
 import hannah.bd.shelfify.views.settings.HowItWorks
 import hannah.bd.shelfify.views.settings.OurOtherApps
@@ -42,6 +44,7 @@ fun NavigationStack(
     startTwentyMinsActivity: () -> Unit,
     startFortyMinsActivity: () -> Unit,
     startSixtyMinsActivity: () -> Unit,
+    db: AppDatabase?,
     ) {
     val navController = rememberNavController()
     var preferences = UserPreferences(LocalContext.current)
@@ -66,6 +69,7 @@ fun NavigationStack(
         }
         composable("sprint5") {
             SprintStack(
+                db,
                 onFinish = {
                     scope.launch {
                         preferences.updateWordCount(it)
@@ -76,6 +80,7 @@ fun NavigationStack(
         }
         composable("sprint20") {
             SprintStack(
+                db,
                 onFinish = {
                     scope.launch {
                         preferences.updateWordCount(it)
@@ -86,6 +91,7 @@ fun NavigationStack(
         }
         composable("sprint40") {
             SprintStack(
+                db,
                 onFinish = {
                     scope.launch {
                         preferences.updateWordCount(it)
@@ -96,6 +102,7 @@ fun NavigationStack(
         }
         composable("sprint60") {
             SprintStack(
+                db,
                 onFinish = {
                     scope.launch {
                         preferences.updateWordCount(it)

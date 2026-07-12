@@ -62,9 +62,10 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.1.1")
     implementation("io.github.thechance101:chart:1.1.0")
 
-    val room_version = "2.5.1"
+    val room_version = "2.6.1"
 
     implementation ("androidx.room:room-runtime:$room_version")
     ksp("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:$room_version")
 }

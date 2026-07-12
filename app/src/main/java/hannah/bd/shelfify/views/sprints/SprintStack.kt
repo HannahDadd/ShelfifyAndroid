@@ -1,6 +1,7 @@
 package hannah.bd.getitwrite.views.sprints
 
 import android.annotation.SuppressLint
+import android.system.Os.stat
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -31,6 +32,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import hannah.bd.shelfify.R
+import hannah.bd.shelfify.modals.AppDatabase
+import hannah.bd.shelfify.modals.Stat
 import hannah.bd.shelfify.views.components.NumberInput
 import java.util.Date
 import kotlin.random.Random
@@ -38,7 +41,7 @@ import kotlin.random.Random
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("NewApi")
 @Composable
-fun SprintStack(onFinish: (Int) -> Unit, initialMinute: Int) {
+fun SprintStack(db: AppDatabase?, onFinish: (Int) -> Unit, initialMinute: Int) {
     var sprintState by remember { mutableStateOf(SprintState.SPRINT) }
     var endWordCount by remember { mutableStateOf(0) }
 
@@ -67,7 +70,18 @@ fun SprintStack(onFinish: (Int) -> Unit, initialMinute: Int) {
                 }
 
                 Spacer(Modifier.weight(1f))
-                Button(onClick = { onFinish(endWordCount) }) {
+                Button(onClick = {
+                    val stat = Stat(
+                        id = Random.nextInt(),
+                        wordsWritten = endWordCount,
+                        date = Date(),
+                        minutes = initialMinute
+                    )
+                    db?.let {
+                        db.statDao().insertAll(arrayOf(stat))
+                    }
+                    onFinish(endWordCount)
+                }) {
                     Text("Finish")
                 }
             }
