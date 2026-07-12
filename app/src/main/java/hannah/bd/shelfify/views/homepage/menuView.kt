@@ -27,6 +27,7 @@ import hannah.bd.shelfify.views.settings.settingsView
 @Composable
 fun MenuView(
     growAction: () -> Unit,
+    statsAction: () -> Unit,
     navController: NavController
 ) {
 
@@ -52,6 +53,16 @@ fun MenuView(
         ) {
 
             if (showButtons) {
+
+                Image(
+                    painter = painterResource(R.drawable.graphbtn),
+                    contentDescription = "Statistics",
+                    modifier = Modifier
+                        .size(buttonSize)
+                        .clickable {
+                            statsAction()
+                        }
+                )
 
                 Image(
                     painter = painterResource(R.drawable.growbtn),

@@ -165,7 +165,10 @@ fun AppMainPage(navController: NavController,
     ) {
         backGroundView()
         LibraryView(wordsWritten)
-        MenuView({ navController.navigate(Screen.Grow.route)}, navController = navController)
+        MenuView(
+            { navController.navigate(Screen.Grow.route)},
+            { navController.navigate(Screen.Stats.route)},
+            navController = navController)
         ghostView()
 
         if (!hasSeenOnboarding) {

@@ -24,6 +24,7 @@ import hannah.bd.getitwrite.views.sprints.SprintStack
 import hannah.bd.shelfify.AppMainPage
 import hannah.bd.shelfify.modals.AppDatabase
 import hannah.bd.shelfify.modals.UserPreferences
+import hannah.bd.shelfify.views.graphs.GraphForWriter
 import hannah.bd.shelfify.views.settings.HowItWorks
 import hannah.bd.shelfify.views.settings.OurOtherApps
 import hannah.bd.shelfify.views.settings.TsAndCsView
@@ -33,6 +34,7 @@ import kotlinx.coroutines.launch
 sealed class Screen(val route: String) {
     object Main: Screen("main_screen")
     object Grow: Screen("grow_screen")
+    object Stats: Screen("stats_screen")
 }
 
 @Composable
@@ -66,6 +68,11 @@ fun NavigationStack(
                 startFortyMinsActivity = startFortyMinsActivity,
                 startSixtyMinsActivity = startSixtyMinsActivity,
             )
+        }
+        composable(
+            route = Screen.Stats.route
+        ) {
+            GraphForWriter(db)
         }
         composable("sprint5") {
             SprintStack(
