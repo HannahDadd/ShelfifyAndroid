@@ -40,6 +40,13 @@ import com.aay.compose.baseComponents.model.GridOrientation
 import com.aay.compose.lineChart.LineChart
 import com.aay.compose.lineChart.model.LineParameters
 import com.aay.compose.lineChart.model.LineType
+import com.patrykandpatryk.vico.compose.axis.horizontal.bottomAxis
+import com.patrykandpatryk.vico.compose.axis.vertical.startAxis
+import com.patrykandpatryk.vico.compose.chart.Chart
+import com.patrykandpatryk.vico.compose.chart.column.columnChart
+import com.patrykandpatryk.vico.core.entry.FloatEntry
+import com.patrykandpatryk.vico.core.entry.entryModelOf
+import com.patrykandpatryk.vico.view.chart.line.lineChart
 import hannah.bd.shelfify.R
 import hannah.bd.shelfify.modals.AppDatabase
 import hannah.bd.shelfify.modals.Stat
@@ -99,47 +106,6 @@ fun GraphForWriter(
                     }
                 }
                 item {
-                    val testBarParameters: List<BarParameters> = listOf(
-                        BarParameters(
-                            dataName = "Completed",
-                            data = listOf(0.6, 10.6, 80.0, 50.6, 44.0, 100.6, 10.0),
-                            barColor = Color(0xFF6C3428)
-                        ),
-                        BarParameters(
-                            dataName = "Completed",
-                            data = listOf(50.0, 30.6, 77.0, 69.6, 50.0, 30.6, 80.0),
-                            barColor = Color(0xFFBA704F),
-                        ),
-                        BarParameters(
-                            dataName = "Completed",
-                            data = listOf(100.0, 99.6, 60.0, 80.6, 10.0, 100.6, 55.99),
-                            barColor = Color(0xFFDFA878),
-                        ),
-                    )
-
-                    Box(Modifier.height(700.dp)) {
-                        BarChart(
-                            chartParameters = testBarParameters,
-                            gridColor = Color.DarkGray,
-                            xAxisData = listOf("2016", "2017", "2018", "2019", "2020", "2021", "2022"),
-                            isShowGrid = true,
-                            animateChart = true,
-                            showGridWithSpacer = true,
-                            yAxisStyle = TextStyle(
-                                fontSize = 14.sp,
-                                color = Color.DarkGray,
-                            ),
-                            xAxisStyle = TextStyle(
-                                fontSize = 14.sp,
-                                color = Color.DarkGray,
-                                fontWeight = FontWeight.W400
-                            ),
-                            yAxisRange = 15,
-                            barWidth = 20.dp
-                        )
-                    }
-                }
-                item {
                     if (stats.size < 2) {
                         Column(modifier = Modifier.padding(16.dp)) {
                             Text("Not enough statistics to show yet! Head over to grow your writing and get those words written.",
@@ -153,66 +119,21 @@ fun GraphForWriter(
                                 fontFamily = FontFamily(Font(R.font.bellefairregularfont))
                             )
 
-                            Box(Modifier.height(700.dp)) {
-                                BarChart(
-                                    chartParameters = listOf(
-                                        BarParameters(
-                                            dataName = "Words Written",
-                                            data = stats.map { it.wordsWritten.toDouble() },
-                                            barColor = MaterialTheme.colorScheme.primary
-                                        ),
-                                    ),
-                                    gridColor = Color.DarkGray,
-                                    xAxisData = stats.map { it.date.toString() },
-                                    isShowGrid = true,
-                                    animateChart = true,
-                                    showGridWithSpacer = true,
-                                    yAxisStyle = TextStyle(
-                                        fontSize = 14.sp,
-                                        color = Color.DarkGray,
-                                    ),
-                                    xAxisStyle = TextStyle(
-                                        fontSize = 14.sp,
-                                        color = Color.DarkGray,
-                                        fontWeight = FontWeight.W400
-                                    ),
-                                    yAxisRange = 15,
-                                    barWidth = 20.dp
-                                )
-                            }
-                            Spacer(modifier = Modifier.height(24.dp))
-                            Box(Modifier.height(700.dp)) {
-                                LineChart(
-                                    modifier = Modifier.fillMaxSize()
-                                        .defaultMinSize(minHeight = 200.dp),
-                                    linesParameters = listOf(
-                                        LineParameters(
-                                            label = "Words Written",
-                                            data = stats.map { it.wordsWritten.toDouble() },
-                                            lineColor = MaterialTheme.colorScheme.primary,
-                                            lineType = LineType.CURVED_LINE,
-                                            lineShadow = true,
-                                        ),
-                                    ),
-                                    isGrid = true,
-                                    gridColor = Color.Blue,
-                                    xAxisData = stats.map { it.date.toString() },
-                                    animateChart = true,
-                                    showGridWithSpacer = true,
-                                    yAxisStyle = TextStyle(
-                                        fontSize = 14.sp,
-                                        color = Color.Gray,
-                                    ),
-                                    xAxisStyle = TextStyle(
-                                        fontSize = 14.sp,
-                                        color = Color.Gray,
-                                        fontWeight = FontWeight.W400
-                                    ),
-                                    yAxisRange = 14,
-                                    oneLineChart = false,
-                                    gridOrientation = GridOrientation.VERTICAL
-                                )
-                            }
+                            val entryModel = entryModelOf(stats.mapIndexed { index, stat ->
+                                FloatEntry(index.toFloat(), stat.wordsWritten.toFloat())
+                            })
+                            Chart(
+                                chart = columnChart(),
+                                model = entryModel,
+                                startAxis = startAxis(),
+                                bottomAxis = bottomAxis(),
+                            )
+                            Chart(
+                                chart = lineChart(),
+                                model = entryModel,
+                                startAxis = startAxis(),
+                                bottomAxis = bottomAxis(),
+                            )
                         }
                     }
                 }
