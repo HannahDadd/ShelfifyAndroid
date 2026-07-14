@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -59,4 +60,17 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation("androidx.datastore:datastore-preferences:1.1.1")
+    implementation("io.github.thechance101:chart:1.1.0")
+
+    val room_version = "2.6.1"
+
+    implementation ("androidx.room:room-runtime:$room_version")
+    ksp("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:2.6.1")
+    ksp("androidx.room:room-compiler:$room_version")
+
+    implementation("com.patrykandpatryk.vico:view:1.5.2")
+    implementation("com.patrykandpatryk.vico:compose:1.5.2")
+    implementation("com.patrykandpatryk.vico:compose-m2:1.5.2")
+    implementation("com.patrykandpatryk.vico:compose-m3:1.5.2")
 }

@@ -14,6 +14,7 @@ import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.minutes
 
 enum class SprintDurations {
+    FIVE_SECS,
     TWENTY_MINS,
     FORTY_MINS,
     ONE_HOUR
@@ -31,6 +32,13 @@ fun SprintCarousel(
             text = "Choose a writing sprint".uppercase(),
             modifier = Modifier.padding(horizontal = 16.dp),
             style = MaterialTheme.typography.labelLarge
+        )
+
+        StartSprintCard(
+            text = "5 Secs (debug only)",
+            onClick = {
+                onAction(SprintDurations.FIVE_SECS)
+            }
         )
 
         StartSprintCard(

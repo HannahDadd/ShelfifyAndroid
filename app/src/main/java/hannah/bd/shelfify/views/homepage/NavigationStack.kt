@@ -19,9 +19,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.room.Room
 import hannah.bd.getitwrite.views.sprints.SprintStack
 import hannah.bd.shelfify.AppMainPage
+import hannah.bd.shelfify.modals.AppDatabase
 import hannah.bd.shelfify.modals.UserPreferences
+import hannah.bd.shelfify.views.graphs.GraphForWriter
 import hannah.bd.shelfify.views.settings.HowItWorks
 import hannah.bd.shelfify.views.settings.OurOtherApps
 import hannah.bd.shelfify.views.settings.TsAndCsView
@@ -31,6 +34,7 @@ import kotlinx.coroutines.launch
 sealed class Screen(val route: String) {
     object Main: Screen("main_screen")
     object Grow: Screen("grow_screen")
+    object Stats: Screen("stats_screen")
 }
 
 @Composable
@@ -42,6 +46,7 @@ fun NavigationStack(
     startTwentyMinsActivity: () -> Unit,
     startFortyMinsActivity: () -> Unit,
     startSixtyMinsActivity: () -> Unit,
+    db: AppDatabase?,
     ) {
     val navController = rememberNavController()
     var preferences = UserPreferences(LocalContext.current)
@@ -49,13 +54,18 @@ fun NavigationStack(
 
     NavHost(navController = navController, startDestination = Screen.Main.route) {
         composable(route = Screen.Main.route) {
-            AppMainPage(navController = navController, preferences, onRequestPermission = onRequestPermission)
+            AppMainPage(
+                navController = navController,
+                preferences,
+                db,
+                onRequestPermission = onRequestPermission)
         }
         composable(
             route = Screen.Grow.route
         ) {
             growYourLibraryHomepage(
-                navController, { navController.popBackStack() },
+                navController,
+                { navController.popBackStack() },
                 userPreferences = preferences,
                 hasPermission = hasPermission,
                 canPostPromoted = canPostPromoted,
@@ -64,8 +74,29 @@ fun NavigationStack(
                 startSixtyMinsActivity = startSixtyMinsActivity,
             )
         }
+        composable(
+            route = Screen.Stats.route
+        ) {
+            GraphForWriter(
+                navigateBack = { navController.popBackStack() },
+                db,
+                userPreferences = preferences,
+            )
+        }
+        composable("sprint5") {
+            SprintStack(
+                db,
+                onFinish = {
+                    scope.launch {
+                        preferences.updateWordCount(it)
+                    }
+                    navController.popBackStack()
+                }, (5)
+            )
+        }
         composable("sprint20") {
             SprintStack(
+                db,
                 onFinish = {
                     scope.launch {
                         preferences.updateWordCount(it)
@@ -76,6 +107,7 @@ fun NavigationStack(
         }
         composable("sprint40") {
             SprintStack(
+                db,
                 onFinish = {
                     scope.launch {
                         preferences.updateWordCount(it)
@@ -86,6 +118,7 @@ fun NavigationStack(
         }
         composable("sprint60") {
             SprintStack(
+                db,
                 onFinish = {
                     scope.launch {
                         preferences.updateWordCount(it)

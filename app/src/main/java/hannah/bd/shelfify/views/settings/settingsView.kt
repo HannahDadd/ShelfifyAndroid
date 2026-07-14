@@ -9,8 +9,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
@@ -85,35 +87,11 @@ fun settingsView(navController: NavController) {
             listState.firstVisibleItemScrollOffset > 0
         }
     }
-    val appBarElevation by animateDpAsState(targetValue = if (hasScrolled) 4.dp else 0.dp)
-    Scaffold(
-        containerColor = MaterialTheme.colorScheme.surface,
-        contentColor = MaterialTheme.colorScheme.onSurface,
-        topBar = {
-            CenterAlignedTopAppBar(
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = if (isSystemInDarkTheme()) {
-                        MaterialTheme.colorScheme.surfaceVariant.copy(alpha = if (hasScrolled) 1f else 0f)
-                    } else {
-                        MaterialTheme.colorScheme.surface
-                    },
-                ),
-                modifier = Modifier.shadow(appBarElevation),
-                title = { Text(text = "Settings") },
-                navigationIcon = {
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Go back")
-                    }
-                },
-                actions = { },
-            )
-        },
-    ) { padding ->
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
             LazyColumn(contentPadding = PaddingValues(16.dp), modifier = Modifier.widthIn(max = 600.dp), state = listState) {
-                item { CategoryItem(title = "How Shelfify Works", icon = Icons.Outlined.Info, onClick = {
-                    navController.navigate("howItWorks")
-                }) }
+                item {
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
                 item { CategoryItem(title = "How Shelfify Works", icon = Icons.Outlined.Info, onClick = {
                     navController.navigate("howItWorks")
                 }) }
@@ -133,5 +111,4 @@ fun settingsView(navController: NavController) {
 //                item { AppVersion(versionText = "Version 1.0.0", copyrights = "© 2024 Your Company", onClick = { /* TODO Add easter egg after 8 times is clicked */ }) }
             }
         }
-    }
 }
