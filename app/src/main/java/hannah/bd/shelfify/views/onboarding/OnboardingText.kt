@@ -31,7 +31,8 @@ fun OnboardingText(
             Text(
                 text = text,
                 fontFamily = FontFamily(Font(R.font.bellefairregularfont)),
-                modifier = modifier
+                modifier = modifier,
+                color = Color.Black
             )
         }
     }

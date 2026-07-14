@@ -1,6 +1,8 @@
 package hannah.bd.shelfify.views.homepage
 
 import android.R.attr.type
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -37,6 +39,7 @@ sealed class Screen(val route: String) {
     object Stats: Screen("stats_screen")
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NavigationStack(
     modifier: Modifier,

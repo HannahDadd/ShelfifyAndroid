@@ -140,7 +140,7 @@ fun GraphForWriter(
                             chart = lineChart(),
                             model = entryModel,
                             startAxis = startAxis(),
-                            bottomAxis = bottomAxis(),
+                            bottomAxis = bottomAxis()
                         )
 //                        Text("Your best sprint was on ${ formatter.format(bestStat.date) } at ${ formatterHours.format(bestStat.date) }. You wrote ${bestStat.wordsWritten} words.",
 //                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
