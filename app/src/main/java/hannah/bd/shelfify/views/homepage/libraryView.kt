@@ -54,7 +54,7 @@ private fun getLibraryImage(wordsWritten: Int): Int {
         R.drawable.library_20
     )
 
-    val stage = ((wordsWritten / 500) + 1)
+    val stage = ((wordsWritten / 5000) + 1)
         .coerceIn(1, 20)
 
     return libraryImages[stage - 1]

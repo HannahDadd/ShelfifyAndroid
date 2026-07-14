@@ -1,12 +1,14 @@
 package hannah.bd.shelfify.views.graphs
 
 import android.os.Build
+import android.util.Half.toFloat
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -32,13 +34,19 @@ import com.patrykandpatryk.vico.compose.axis.vertical.startAxis
 import com.patrykandpatryk.vico.compose.chart.Chart
 import com.patrykandpatryk.vico.compose.chart.column.columnChart
 import com.patrykandpatryk.vico.compose.chart.line.lineChart
+import com.patrykandpatryk.vico.core.component.shape.ShapeComponent
+import com.patrykandpatryk.vico.core.component.text.TextComponent
 import com.patrykandpatryk.vico.core.entry.FloatEntry
 import com.patrykandpatryk.vico.core.entry.entryModelOf
+import com.patrykandpatryk.vico.core.legend.Legend
+import com.patrykandpatryk.vico.core.legend.VerticalLegend
 import hannah.bd.shelfify.R
 import hannah.bd.shelfify.modals.AppDatabase
 import hannah.bd.shelfify.modals.Stat
 import hannah.bd.shelfify.modals.UserPreferences
 import java.time.LocalDate
+import java.time.ZoneId
+import java.time.temporal.TemporalQueries.localDate
 import java.util.Calendar
 import java.util.Date
 
@@ -99,19 +107,27 @@ fun GraphForWriter(
                     )
                 }
                 item {
+                    Text("Library level: ${ ((wordsWritten / 5000) + 1).coerceIn(1, 20) } of 20",
+                        fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
+                }
+                item {
                     Text(
-                        "You've finished ${stats.size} writing sprints.",
-                        fontFamily = FontFamily(Font(R.font.bellefairregularfont))
+                        "All Time Sprints Graphs",
+                        fontFamily = FontFamily(Font(R.font.abrilfatfaceregular))
                     )
                 }
                 item {
                     Column(verticalArrangement = Arrangement.spacedBy(15.dp)) {
 
+                        var cumulative = 0
                         val entryModel = entryModelOf(stats.mapIndexed { index, stat ->
-                            FloatEntry(index.toFloat(), stat.wordsWritten.toFloat())
+                            cumulative = cumulative + stat.wordsWritten
+                            FloatEntry(index.toFloat(), cumulative.toFloat())
                         })
-                        Text("Words written across all your sprints",
-                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
+                        Text(
+                            "You've finished ${stats.size} writing sprints in the app. Look at that cumulative word count going up!",
+                            fontFamily = FontFamily(Font(R.font.bellefairregularfont))
+                        )
                         Chart(
                             chart = lineChart(),
                             model = entryModel,
@@ -120,60 +136,80 @@ fun GraphForWriter(
                         )
                     }
                 }
-//                item {
-//                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-//                        val cal: Calendar = Calendar.getInstance()
-//                        cal.add(Calendar.MONTH, -1)
-//                        val result: Date = cal.getTime()
-//
-//                        val statsLastMonth = stats
-//                            .filter { it.date.after(cal.getTime()) }
-//
+                item {
+                    Text(
+                        "Monthly Sprints",
+                        fontFamily = FontFamily(Font(R.font.abrilfatfaceregular))
+                    )
+                }
+                item {
+                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                        val oneMonthAgo = LocalDate.now(ZoneId.systemDefault()).minusMonths(1)
+                        val oneMonthAgoDate = Date.from(oneMonthAgo.atStartOfDay(ZoneId.systemDefault()).toInstant())
+
+                        val statsLastMonth = stats
+                            .filter { it.date.after(oneMonthAgoDate) }
+
 //                        val bestStat = statsLastMonth.maxBy { it.wordsWritten }
+//                        var cumulative = 0
 //
-//                        val entryModel = entryModelOf(statsLastMonth
-//                            .mapIndexed { index, stat ->
-//                            FloatEntry(index.toFloat(), stat.wordsWritten.toFloat())
-//                        })
-//                        Text("Sprints finished in the last month: ${ statsLastMonth.size }",
-//                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
-//                        Chart(
-//                            chart = columnChart(),
-//                            model = entryModel,
-//                            startAxis = startAxis(),
-//                            bottomAxis = bottomAxis(),
-//                        )
+                        val entryModel = entryModelOf(statsLastMonth
+                            .mapIndexed { index, stat ->
+//                                cumulative = cumulative + stat.wordsWritten
+                                FloatEntry(index.toFloat(), stat.wordsWritten.toFloat())
+                        })
+                        Text("You've finished ${statsLastMonth.size} writing sprints in the app. This is how much you wrote in them:",
+                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
+                        Chart(
+                            chart = columnChart(),
+                            model = entryModel,
+                            startAxis = startAxis(),
+                            bottomAxis = bottomAxis(),
+                        )
 //                        Text("Your best sprint in the last month was on ${ bestStat.date.toString() }! You wrote ${bestStat.wordsWritten}. Congrats!",
 //                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
-//                    }
-//                }
-//                item {
-//                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-//                        val cal: Calendar = Calendar.getInstance()
-//                        cal.add(Calendar.YEAR, -1)
-//                        val result: Date = cal.getTime()
-//
-//                        val statsLastYear = stats
-//                            .filter { it.date.after(cal.getTime()) }
-//
+                    }
+                }
+                item {
+                    Text(
+                        "Yearly Graphs",
+                        fontFamily = FontFamily(Font(R.font.abrilfatfaceregular))
+                    )
+                }
+                item {
+                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                        val cal: Calendar = Calendar.getInstance()
+                        cal.add(Calendar.YEAR, -1)
+                        val result: Date = cal.getTime()
+
+                        val statsLastYear = stats
+                            .filter { it.date.after(cal.getTime()) }
+
 //                        val bestStat = statsLastYear.maxBy { it.wordsWritten }
-//
-//                        val entryModel = entryModelOf(statsLastYear
-//                            .mapIndexed { index, stat ->
-//                                FloatEntry(index.toFloat(), stat.wordsWritten.toFloat())
-//                            })
-//                        Text("Sprints finished in the last month: ${ statsLastYear.size }",
-//                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
-//                        Chart(
-//                            chart = lineChart(),
-//                            model = entryModel,
-//                            startAxis = startAxis(),
-//                            bottomAxis = bottomAxis(),
-//                        )
+
+                        val entryModel = entryModelOf(statsLastYear
+                            .mapIndexed { index, stat ->
+                                FloatEntry(index.toFloat(), stat.wordsWritten.toFloat())
+                            })
+                        Text("You've finished ${statsLastYear.size} writing sprints in the app. This is how much you wrote in them:",
+                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
+                        Chart(
+                            chart = lineChart(),
+                            model = entryModel,
+                            startAxis = startAxis(),
+                            bottomAxis = bottomAxis(),
+                            legend = VerticalLegend(
+                                items = arrayOf(LegendItem()),
+                                iconSizeDp = TODO(),
+                                iconPaddingDp = TODO(),
+                                spacingDp = TODO(),
+                                padding = TODO(),
+                            )
+                        )
 //                        Text("Your best sprint in the last year was on ${ bestStat.date.toString() }! You wrote ${bestStat.wordsWritten}.",
 //                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
-//                    }
-//                }
+                    }
+                }
             }
         }
     }
