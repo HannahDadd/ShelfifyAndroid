@@ -44,8 +44,11 @@ import hannah.bd.shelfify.R
 import hannah.bd.shelfify.modals.AppDatabase
 import hannah.bd.shelfify.modals.Stat
 import hannah.bd.shelfify.modals.UserPreferences
+import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.time.OffsetDateTime
 import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalQueries.localDate
 import java.util.Calendar
 import java.util.Date
@@ -124,6 +127,11 @@ fun GraphForWriter(
                             cumulative = cumulative + stat.wordsWritten
                             FloatEntry(index.toFloat(), cumulative.toFloat())
                         })
+
+//                        val bestStat = stats.maxBy { it.wordsWritten }
+//                        val formatter = SimpleDateFormat("dd MMM yyyy")
+//                        val formatterHours = SimpleDateFormat("h:mm a")
+
                         Text(
                             "You've finished ${stats.size} writing sprints in the app. Look at that cumulative word count going up!",
                             fontFamily = FontFamily(Font(R.font.bellefairregularfont))
@@ -134,6 +142,8 @@ fun GraphForWriter(
                             startAxis = startAxis(),
                             bottomAxis = bottomAxis(),
                         )
+//                        Text("Your best sprint was on ${ formatter.format(bestStat.date) } at ${ formatterHours.format(bestStat.date) }. You wrote ${bestStat.wordsWritten} words.",
+//                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
                     }
                 }
                 item {
@@ -150,12 +160,12 @@ fun GraphForWriter(
                         val statsLastMonth = stats
                             .filter { it.date.after(oneMonthAgoDate) }
 
-//                        val bestStat = statsLastMonth.maxBy { it.wordsWritten }
-//                        var cumulative = 0
-//
+                        val bestStatMonth = statsLastMonth.maxBy { it.wordsWritten }
+                        val formatterMonth = SimpleDateFormat("dd MMM yyyy")
+                        val formatterHoursMonth = SimpleDateFormat("h:mm a")
+
                         val entryModel = entryModelOf(statsLastMonth
                             .mapIndexed { index, stat ->
-//                                cumulative = cumulative + stat.wordsWritten
                                 FloatEntry(index.toFloat(), stat.wordsWritten.toFloat())
                         })
                         Text("You've finished ${statsLastMonth.size} writing sprints in the app. This is how much you wrote in them:",
@@ -166,7 +176,7 @@ fun GraphForWriter(
                             startAxis = startAxis(),
                             bottomAxis = bottomAxis(),
                         )
-//                        Text("Your best sprint in the last month was on ${ bestStat.date.toString() }! You wrote ${bestStat.wordsWritten}. Congrats!",
+//                        Text("Your best sprint in the last month was on ${ formatter.format(bestStat.date) } at ${ formatterHours.format(bestStat.date) }. You wrote ${bestStat.wordsWritten} words.",
 //                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
                     }
                 }
@@ -185,7 +195,9 @@ fun GraphForWriter(
                         val statsLastYear = stats
                             .filter { it.date.after(cal.getTime()) }
 
-//                        val bestStat = statsLastYear.maxBy { it.wordsWritten }
+                        val bestStat = statsLastYear.maxBy { it.wordsWritten }
+                        val formatter = SimpleDateFormat("dd MMM yyyy")
+                        val formatterHours = SimpleDateFormat("h:mm a")
 
                         val entryModel = entryModelOf(statsLastYear
                             .mapIndexed { index, stat ->
@@ -197,17 +209,10 @@ fun GraphForWriter(
                             chart = lineChart(),
                             model = entryModel,
                             startAxis = startAxis(),
-                            bottomAxis = bottomAxis(),
-                            legend = VerticalLegend(
-                                items = arrayOf(LegendItem()),
-                                iconSizeDp = TODO(),
-                                iconPaddingDp = TODO(),
-                                spacingDp = TODO(),
-                                padding = TODO(),
-                            )
+                            bottomAxis = bottomAxis()
                         )
-//                        Text("Your best sprint in the last year was on ${ bestStat.date.toString() }! You wrote ${bestStat.wordsWritten}.",
-//                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
+                        Text("Your best sprint in the last year was on ${ formatter.format(bestStat.date) } at ${ formatterHours.format(bestStat.date) }. You wrote ${bestStat.wordsWritten} words.",
+                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
                     }
                 }
             }
