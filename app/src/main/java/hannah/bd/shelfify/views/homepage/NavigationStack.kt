@@ -37,6 +37,7 @@ sealed class Screen(val route: String) {
     object Main: Screen("main_screen")
     object Grow: Screen("grow_screen")
     object Stats: Screen("stats_screen")
+    object Final: Screen("final_screen")
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -76,6 +77,11 @@ fun NavigationStack(
                 startFortyMinsActivity = startFortyMinsActivity,
                 startSixtyMinsActivity = startSixtyMinsActivity,
             )
+        }
+        composable(
+            route = Screen.Final.route
+        ) {
+            crystalBallLibrary({navController.popBackStack()})
         }
         composable(
             route = Screen.Stats.route

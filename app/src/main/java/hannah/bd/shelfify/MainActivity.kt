@@ -169,8 +169,10 @@ fun AppMainPage(navController: NavController,
         MenuView(
             { navController.navigate(Screen.Grow.route)},
             { navController.navigate(Screen.Stats.route)},
+            {navController.navigate(Screen.Final.route)},
             db,
-            navController = navController)
+            navController = navController,
+            userPreferences)
         ghostView()
 
         if (!hasSeenOnboarding) {
