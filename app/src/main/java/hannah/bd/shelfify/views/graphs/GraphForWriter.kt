@@ -152,69 +152,69 @@ fun GraphForWriter(
                         fontFamily = FontFamily(Font(R.font.abrilfatfaceregular))
                     )
                 }
-                item {
-                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        val oneMonthAgo = LocalDate.now(ZoneId.systemDefault()).minusMonths(1)
-                        val oneMonthAgoDate = Date.from(oneMonthAgo.atStartOfDay(ZoneId.systemDefault()).toInstant())
-
-                        val statsLastMonth = stats
-                            .filter { it.date.after(oneMonthAgoDate) }
-
-                        val bestStatMonth = statsLastMonth.maxBy { it.wordsWritten }
-                        val formatterMonth = SimpleDateFormat("dd MMM yyyy")
-                        val formatterHoursMonth = SimpleDateFormat("h:mm a")
-
-                        val entryModel = entryModelOf(statsLastMonth
-                            .mapIndexed { index, stat ->
-                                FloatEntry(index.toFloat(), stat.wordsWritten.toFloat())
-                        })
-                        Text("You've finished ${statsLastMonth.size} writing sprints in the app. This is how much you wrote in them:",
-                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
-                        Chart(
-                            chart = columnChart(),
-                            model = entryModel,
-                            startAxis = startAxis(),
-                            bottomAxis = bottomAxis(),
-                        )
-//                        Text("Your best sprint in the last month was on ${ formatter.format(bestStat.date) } at ${ formatterHours.format(bestStat.date) }. You wrote ${bestStat.wordsWritten} words.",
+//                item {
+//                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+//                        val oneMonthAgo = LocalDate.now(ZoneId.systemDefault()).minusMonths(1)
+//                        val oneMonthAgoDate = Date.from(oneMonthAgo.atStartOfDay(ZoneId.systemDefault()).toInstant())
+//
+//                        val statsLastMonth = stats
+//                            .filter { it.date.after(oneMonthAgoDate) }
+//
+//                        val bestStatMonth = statsLastMonth.maxBy { it.wordsWritten }
+//                        val formatterMonth = SimpleDateFormat("dd MMM yyyy")
+//                        val formatterHoursMonth = SimpleDateFormat("h:mm a")
+//
+//                        val entryModel = entryModelOf(statsLastMonth
+//                            .mapIndexed { index, stat ->
+//                                FloatEntry(index.toFloat(), stat.wordsWritten.toFloat())
+//                        })
+//                        Text("You've finished ${statsLastMonth.size} writing sprints in the app. This is how much you wrote in them:",
 //                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
-                    }
-                }
+//                        Chart(
+//                            chart = columnChart(),
+//                            model = entryModel,
+//                            startAxis = startAxis(),
+//                            bottomAxis = bottomAxis(),
+//                        )
+////                        Text("Your best sprint in the last month was on ${ formatter.format(bestStat.date) } at ${ formatterHours.format(bestStat.date) }. You wrote ${bestStat.wordsWritten} words.",
+////                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
+//                    }
+//                }
                 item {
                     Text(
                         "Yearly Graphs",
                         fontFamily = FontFamily(Font(R.font.abrilfatfaceregular))
                     )
                 }
-                item {
-                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        val cal: Calendar = Calendar.getInstance()
-                        cal.add(Calendar.YEAR, -1)
-                        val result: Date = cal.getTime()
-
-                        val statsLastYear = stats
-                            .filter { it.date.after(cal.getTime()) }
-
-                        val bestStat = statsLastYear.maxBy { it.wordsWritten }
-                        val formatter = SimpleDateFormat("dd MMM yyyy")
-                        val formatterHours = SimpleDateFormat("h:mm a")
-
-                        val entryModel = entryModelOf(statsLastYear
-                            .mapIndexed { index, stat ->
-                                FloatEntry(index.toFloat(), stat.wordsWritten.toFloat())
-                            })
-                        Text("You've finished ${statsLastYear.size} writing sprints in the app. This is how much you wrote in them:",
-                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
-                        Chart(
-                            chart = lineChart(),
-                            model = entryModel,
-                            startAxis = startAxis(),
-                            bottomAxis = bottomAxis()
-                        )
-                        Text("Your best sprint in the last year was on ${ formatter.format(bestStat.date) } at ${ formatterHours.format(bestStat.date) }. You wrote ${bestStat.wordsWritten} words.",
-                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
-                    }
-                }
+//                item {
+//                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+//                        val cal: Calendar = Calendar.getInstance()
+//                        cal.add(Calendar.YEAR, -1)
+//                        val result: Date = cal.getTime()
+//
+//                        val statsLastYear = stats
+//                            .filter { it.date.after(cal.getTime()) }
+//
+//                        val bestStat = statsLastYear.maxBy { it.wordsWritten }
+//                        val formatter = SimpleDateFormat("dd MMM yyyy")
+//                        val formatterHours = SimpleDateFormat("h:mm a")
+//
+//                        val entryModel = entryModelOf(statsLastYear
+//                            .mapIndexed { index, stat ->
+//                                FloatEntry(index.toFloat(), stat.wordsWritten.toFloat())
+//                            })
+//                        Text("You've finished ${statsLastYear.size} writing sprints in the app. This is how much you wrote in them:",
+//                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
+//                        Chart(
+//                            chart = lineChart(),
+//                            model = entryModel,
+//                            startAxis = startAxis(),
+//                            bottomAxis = bottomAxis()
+//                        )
+//                        Text("Your best sprint in the last year was on ${ formatter.format(bestStat.date) } at ${ formatterHours.format(bestStat.date) }. You wrote ${bestStat.wordsWritten} words.",
+//                            fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
+//                    }
+//                }
             }
         }
     }
