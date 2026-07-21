@@ -5,6 +5,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -60,7 +62,8 @@ fun MenuView(
         Column(
             modifier = Modifier
                 .align(Alignment.BottomStart)
-                .padding(16.dp),
+                .padding(24.dp)
+                .padding(bottom = 70.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 
@@ -99,15 +102,30 @@ fun MenuView(
                 )
             }
 
-            Image(
-                painter = painterResource(R.drawable.menu_btn),
-                contentDescription = "Menu",
-                modifier = Modifier
-                    .size(buttonSize)
-                    .clickable {
-                        showButtons = !showButtons
-                    }
-            )
+            Row {
+
+                Image(
+                    painter = painterResource(R.drawable.menu_btn),
+                    contentDescription = "Menu",
+                    modifier = Modifier
+                        .size(buttonSize)
+                        .clickable {
+                            showButtons = !showButtons
+                        }
+                )
+
+                Spacer(modifier = Modifier.weight(1.0f))
+
+                Image(
+                    painter = painterResource(R.drawable.crystal_btn),
+                    contentDescription = "Menu",
+                    modifier = Modifier
+                        .size(buttonSize)
+                        .clickable {
+                        }
+                )
+
+            }
         }
     }
 

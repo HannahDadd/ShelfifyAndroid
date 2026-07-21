@@ -78,7 +78,7 @@ fun GraphForWriter(
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        "See your writing progress",
+                        "✨ Your Writing Stats ✨",
                     )
                 },
                 navigationIcon = {
