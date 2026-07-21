@@ -67,7 +67,7 @@ fun MenuView(
             if (showButtons) {
 
                 Image(
-                    painter = painterResource(R.drawable.growbtn),
+                    painter = painterResource(R.drawable.grow_btn),
                     contentDescription = "Grow your library",
                     modifier = Modifier
                         .size(buttonSize)
@@ -78,7 +78,7 @@ fun MenuView(
 
                 if (stats.size > 2) {
                     Image(
-                        painter = painterResource(R.drawable.graphbtn),
+                        painter = painterResource(R.drawable.graph_btn),
                         contentDescription = "Statistics",
                         modifier = Modifier
                             .size(buttonSize)
@@ -89,7 +89,7 @@ fun MenuView(
                 }
 
                 Image(
-                    painter = painterResource(R.drawable.settingsbtn),
+                    painter = painterResource(R.drawable.broom_btn),
                     contentDescription = "Settings",
                     modifier = Modifier
                         .size(buttonSize)
@@ -100,7 +100,7 @@ fun MenuView(
             }
 
             Image(
-                painter = painterResource(R.drawable.menubtn),
+                painter = painterResource(R.drawable.menu_btn),
                 contentDescription = "Menu",
                 modifier = Modifier
                     .size(buttonSize)

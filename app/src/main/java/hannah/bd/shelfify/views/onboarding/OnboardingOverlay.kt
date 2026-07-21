@@ -55,7 +55,7 @@ fun OnboardingOverlay(
             Row {
 
                 Image(
-                    painter = painterResource(R.drawable.gilly),
+                    painter = painterResource(R.drawable.ghost_gilly),
                     contentDescription = null,
                     modifier = Modifier.size(50.dp)
                 )
@@ -79,7 +79,7 @@ fun OnboardingOverlay(
                 Spacer(Modifier.height(32.dp))
 
                 Image(
-                    painter = painterResource(R.drawable.nextbtn),
+                    painter = painterResource(R.drawable.next_btn),
                     contentDescription = "Next button",
                     modifier = Modifier.size(75.dp)
                         .clickable {

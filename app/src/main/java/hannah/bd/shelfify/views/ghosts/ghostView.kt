@@ -29,42 +29,42 @@ fun ghostView() {
     val ghosts = remember {
         listOf(
             Ghost(
-                imageRes = R.drawable.ghostly,
+                imageRes = R.drawable.ghost_wizard,
                 ghostName = "ghostly",
                 comments = GlobalVariables.ghostlyGhostQuotes,
                 width = 60.dp,
                 height = 80.dp
             ),
             Ghost(
-                imageRes = R.drawable.sid,
+                imageRes = R.drawable.ghost_sid,
                 ghostName = "sid",
                 comments = GlobalVariables.sidGhostQuotes,
                 width = 60.dp,
                 height = 70.dp
             ),
             Ghost(
-                imageRes = R.drawable.margerie,
+                imageRes = R.drawable.ghost_marge,
                 ghostName = "margerie",
                 comments = GlobalVariables.margerieGhostQuotes,
                 width = 60.dp,
                 height = 75.dp
             ),
             Ghost(
-                imageRes = R.drawable.gilly,
+                imageRes = R.drawable.ghost_gilly,
                 ghostName = "gilly",
                 comments = GlobalVariables.gillyGhostQuotes,
                 width = 60.dp,
                 height = 60.dp
             ),
             Ghost(
-                imageRes = R.drawable.gramp,
+                imageRes = R.drawable.ghost_oldman,
                 ghostName = "gramp",
                 comments = GlobalVariables.grampGhostQuotes,
                 width = 60.dp,
                 height = 85.dp
             ),
             Ghost(
-                imageRes = R.drawable.paula,
+                imageRes = R.drawable.ghost_paula,
                 ghostName = "paula",
                 comments = GlobalVariables.paulineGhostQuotes,
                 width = 60.dp,
