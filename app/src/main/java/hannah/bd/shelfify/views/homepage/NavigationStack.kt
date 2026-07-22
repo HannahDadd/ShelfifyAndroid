@@ -30,6 +30,7 @@ import hannah.bd.shelfify.views.graphs.GraphForWriter
 import hannah.bd.shelfify.views.settings.HowItWorks
 import hannah.bd.shelfify.views.settings.MeetTheFamily
 import hannah.bd.shelfify.views.settings.OurOtherApps
+import hannah.bd.shelfify.views.settings.SupportUs
 import hannah.bd.shelfify.views.settings.TsAndCsView
 import hannah.bd.shelfify.views.settings.privacyPolicyView
 import kotlinx.coroutines.launch
@@ -145,6 +146,9 @@ fun NavigationStack(
         }
         composable("privacyPolicy") {
             privacyPolicyView() { navController.popBackStack() }
+        }
+        composable("supportUs") {
+            SupportUs { navController.popBackStack() }
         }
         composable("howItWorks") {
             HowItWorks() { navController.popBackStack() }

@@ -57,6 +57,7 @@ fun growYourLibraryHomepage(
                 title = {
                     Text(
                         "🪴 Grow your Library 🪴",
+                        fontFamily = FontFamily(Font(R.font.dynapuff))
                     )
                 },
                 navigationIcon = {

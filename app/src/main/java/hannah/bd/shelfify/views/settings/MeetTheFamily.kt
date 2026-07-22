@@ -35,7 +35,8 @@ fun MeetTheFamily(
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        "📚 Meet the Library 📚",
+                        "📚 Meet the Family 📚",
+                        fontFamily = FontFamily(Font(hannah.bd.shelfify.R.font.dynapuff)),
                     )
                 },
                 navigationIcon = {
@@ -70,35 +71,12 @@ fun MeetTheFamily(
                     Column {
                         Text(
                             "Gilly",
-                            fontFamily = FontFamily(Font(R.font.abrilfatfaceregular))
+                            fontFamily = FontFamily(Font(R.font.dynapuff))
                         )
                         Text("""
                             Get it Write will gamify your creative writing and get those words written.
-                        """.trimIndent()
-                        )
-                    }
-                }
-                item {
-                    Column {
-                        Text(
-                            "Gilly",
-                            fontFamily = FontFamily(Font(R.font.abrilfatfaceregular))
-                        )
-                        Text("""
-                            Get it Write will gamify your creative writing and get those words written.
-                        """.trimIndent()
-                        )
-                    }
-                }
-                item {
-                    Column {
-                        Text(
-                            "Gilly",
-                            fontFamily = FontFamily(Font(R.font.abrilfatfaceregular))
-                        )
-                        Text("""
-                            Get it Write will gamify your creative writing and get those words written.
-                        """.trimIndent()
+                        """.trimIndent(),
+                                fontFamily = FontFamily(Font(hannah.bd.shelfify.R.font.bellefairregularfont)),
                         )
                     }
                 }

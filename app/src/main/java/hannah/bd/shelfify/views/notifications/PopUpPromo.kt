@@ -31,7 +31,6 @@ fun PopupPromo(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(100.dp)
             .clip(RoundedCornerShape(8.dp))
             .clickable { action() }
             .background(colorResource(R.color.darkGreen))
@@ -42,8 +41,8 @@ fun PopupPromo(
         ) {
             Text(title,
                 color = Color.White,
-                fontSize = 28.sp,
-                fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
+                fontSize = 18.sp,
+                fontFamily = FontFamily(Font(R.font.dynapuff)))
             Text(subtitle,
                 color = Color.White,
                 fontFamily = FontFamily(Font(R.font.bellefairregularfont)))

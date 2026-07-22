@@ -23,6 +23,7 @@ import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.AddCircle
 import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Notifications
@@ -46,6 +47,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
@@ -57,7 +60,8 @@ fun CategoryItem(title: String, icon: ImageVector, onClick: () -> Unit) {
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 16.dp), horizontalArrangement = Arrangement.spacedBy(30.dp)) {
             Icon(icon, contentDescription = null, modifier = Modifier.size(28.dp), tint = MaterialTheme.colorScheme.onSurface)
-            Text(title, style = MaterialTheme.typography.bodyLarge)
+            Text(title, style = MaterialTheme.typography.bodyLarge,
+                fontFamily = FontFamily(Font(hannah.bd.shelfify.R.font.dynapuff)),)
         }
     }
 }
@@ -100,6 +104,10 @@ fun settingsView(navController: NavController) {
                 }) }
                 item { CategoryItem(title = "Our Other Apps", icon = Icons.Outlined.AddCircle, onClick = {
                     navController.navigate("otherApps") })
+                }
+                item { HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp)) }
+                item { CategoryItem(title = "Support the app!", icon = Icons.Outlined.Favorite, onClick = {
+                    navController.navigate("supportUs") })
                 }
                 item { HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp)) }
                 item { CategoryItem(title = "Privacy Policy", icon = Icons.Outlined.Lock, onClick = {

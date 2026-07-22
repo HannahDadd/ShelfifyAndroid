@@ -73,4 +73,6 @@ dependencies {
     implementation("com.patrykandpatryk.vico:compose:1.5.2")
     implementation("com.patrykandpatryk.vico:compose-m2:1.5.2")
     implementation("com.patrykandpatryk.vico:compose-m3:1.5.2")
+
+    implementation("androidx.work:work-runtime:2.11.2")
 }

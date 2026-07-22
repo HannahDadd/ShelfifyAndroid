@@ -79,6 +79,7 @@ fun GraphForWriter(
                 title = {
                     Text(
                         "✨ Your Writing Stats ✨",
+                        fontFamily = FontFamily(Font(R.font.dynapuff))
                     )
                 },
                 navigationIcon = {
@@ -116,7 +117,7 @@ fun GraphForWriter(
                 item {
                     Text(
                         "All Time Sprints Graphs",
-                        fontFamily = FontFamily(Font(R.font.abrilfatfaceregular))
+                        fontFamily = FontFamily(Font(R.font.dynapuff))
                     )
                 }
                 item {
@@ -149,7 +150,7 @@ fun GraphForWriter(
                 item {
                     Text(
                         "Monthly Sprints",
-                        fontFamily = FontFamily(Font(R.font.abrilfatfaceregular))
+                        fontFamily = FontFamily(Font(R.font.dynapuff))
                     )
                 }
                 item {
@@ -168,7 +169,7 @@ fun GraphForWriter(
                             .mapIndexed { index, stat ->
                                 FloatEntry(index.toFloat(), stat.wordsWritten.toFloat())
                         })
-                        Text("You've finished ${statsLastMonth.size} writing sprints in the app. This is how much you wrote in them:",
+                        Text("You've finished ${statsLastMonth.size} writing sprints in the app.",
                             fontFamily = FontFamily(Font(R.font.bellefairregularfont)))
                         Chart(
                             chart = columnChart(),
@@ -186,7 +187,7 @@ fun GraphForWriter(
                 item {
                     Text(
                         "Yearly Graphs",
-                        fontFamily = FontFamily(Font(R.font.abrilfatfaceregular))
+                        fontFamily = FontFamily(Font(R.font.dynapuff))
                     )
                 }
                 item {

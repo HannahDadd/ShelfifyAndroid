@@ -33,6 +33,7 @@ fun OurOtherApps(
                 title = {
                     Text(
                         "Our Other Apps",
+                        fontFamily = FontFamily(Font(hannah.bd.shelfify.R.font.dynapuff)),
                     )
                 },
                 navigationIcon = {
@@ -62,7 +63,8 @@ Featuring focused writing sprints to help you carve out the time, daily streaks 
     
 Whether you’re drafting your first novel in New York, polishing poetry in London, or journaling in the Highlands, the world is full of storytellers, they just need a place to start. Download Get it Write today, start your first sprint, and get those words written.
 
-                        """.trimIndent()
+                        """.trimIndent(),
+                            fontFamily = FontFamily(Font(hannah.bd.shelfify.R.font.bellefairregularfont)),
                         )
                     }
                 }

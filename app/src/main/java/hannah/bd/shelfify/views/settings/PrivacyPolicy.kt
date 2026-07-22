@@ -50,6 +50,7 @@ fun privacyPolicyView(
                 title = {
                     Text(
                         "Privacy Policy",
+                        fontFamily = FontFamily(Font(hannah.bd.shelfify.R.font.dynapuff)),
                     )
                 },
                 navigationIcon = {
@@ -82,7 +83,8 @@ fun privacyPolicyView(
                                 ) {
                                     append("Our Privacy Policy can be found on our website")
                                 }
-                            }
+                            },
+                            fontFamily = FontFamily(Font(hannah.bd.shelfify.R.font.bellefairregularfont)),
                         )
                     }
                 }

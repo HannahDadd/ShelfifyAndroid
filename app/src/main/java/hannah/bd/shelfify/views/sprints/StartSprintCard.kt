@@ -43,8 +43,8 @@ fun StartSprintCard(
         Text(
             text = text,
             color = Color.White,
-            fontSize = 28.sp,
-            fontFamily = FontFamily(Font(R.font.abrilfatfaceregular)),
+            fontSize = 18.sp,
+            fontFamily = FontFamily(Font(R.font.dynapuff)),
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(12.dp)

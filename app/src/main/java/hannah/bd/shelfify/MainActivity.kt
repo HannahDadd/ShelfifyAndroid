@@ -13,6 +13,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -66,6 +67,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         NotificationHelper.createChannel(this)
         notificationManager = LiveUpdateNotificationManager(this)
@@ -173,7 +175,6 @@ fun AppMainPage(navController: NavController,
             db,
             navController = navController,
             userPreferences)
-        ghostView()
 
         if (!hasSeenOnboarding) {
             OnboardingOverlay(

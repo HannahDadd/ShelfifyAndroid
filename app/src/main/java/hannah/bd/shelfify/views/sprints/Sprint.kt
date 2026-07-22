@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import hannah.bd.getitwrite.GlobalVariables
 import hannah.bd.getitwrite.GlobalVariables.inspiringQuotes
 import hannah.bd.shelfify.R
+import hannah.bd.shelfify.views.sprints.SprintBackGroundView
 import kotlinx.coroutines.delay
 import kotlin.math.floor
 
@@ -55,38 +56,31 @@ fun Sprint(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(colorResource(R.color.darkGreen))
-            .padding(16.dp)
     ) {
+        SprintBackGroundView()
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize()
+                .padding(16.dp),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = inspiringQuotes[quoteNumber],
-                textAlign = TextAlign.Center,
-                color = Color.White,
-                fontFamily = FontFamily(Font(R.font.bellefairregularfont)),
-                fontSize = 28.sp
+                text = "${ String.format("%02d:%02d", timeRemaining / 60, timeRemaining % 60) }",
+                color = Color.Black,
+                fontFamily = FontFamily(Font(R.font.dynapuff)),
+                fontSize = 120.sp
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Sprint Time Remaining:",
-                color = Color.White,
-                fontFamily = FontFamily(Font(R.font.bellefairregularfont)),
-                fontSize = 20.sp
-            )
-
-            Text(
-                text = "${ String.format("%02d:%02d", timeRemaining / 60, timeRemaining % 60) }",
-                color = Color.White,
-                fontFamily = FontFamily(Font(R.font.abrilfatfaceregular)),
-                fontSize = 120.sp
+                text = inspiringQuotes[quoteNumber],
+                textAlign = TextAlign.Center,
+                color = Color.Black,
+                fontFamily = FontFamily(Font(R.font.dynapuff)),
+                fontSize = 28.sp
             )
 
             Spacer(modifier = Modifier.height(16.dp))

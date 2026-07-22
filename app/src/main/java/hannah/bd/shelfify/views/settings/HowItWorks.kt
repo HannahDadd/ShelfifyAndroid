@@ -34,6 +34,7 @@ fun HowItWorks(
                 title = {
                     Text(
                         "How Shelfify Works",
+                        fontFamily = FontFamily(Font(hannah.bd.shelfify.R.font.dynapuff)),
                     )
                 },
                 navigationIcon = {
@@ -61,7 +62,8 @@ Property is hard to come by in this modern era. Luckily, you've stumbled across 
 
 A few ghosts may visit your library- don't worry, they're friendly. Ish. I can't wait to see what you do with the place.
 
-                        """.trimIndent()
+                        """.trimIndent(),
+                            fontFamily = FontFamily(Font(hannah.bd.shelfify.R.font.bellefairregularfont)),
                         )
                     }
                 }

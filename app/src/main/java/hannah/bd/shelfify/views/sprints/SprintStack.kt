@@ -64,7 +64,7 @@ fun SprintStack(db: AppDatabase?, onFinish: (Int) -> Unit, initialMinute: Int) {
             ) {
                 Text("Sprint Finished!",
                     fontSize = 32.sp,
-                    fontFamily = FontFamily(Font(R.font.abrilfatfaceregular)))
+                    fontFamily = FontFamily(Font(R.font.dynapuff)))
                 NumberInput(label = "How many words did you write?", value = endWordCount) {
                     endWordCount = it
                 }

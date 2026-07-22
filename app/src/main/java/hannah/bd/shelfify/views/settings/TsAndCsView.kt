@@ -47,6 +47,7 @@ fun TsAndCsView(
                 title = {
                     Text(
                         "Terms and Conditions",
+                        fontFamily = FontFamily(Font(hannah.bd.shelfify.R.font.dynapuff)),
                     )
                 },
                 navigationIcon = {

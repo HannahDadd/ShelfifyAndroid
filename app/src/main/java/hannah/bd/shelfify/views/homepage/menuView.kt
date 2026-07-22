@@ -31,6 +31,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.hannah.shelfify.views.ghosts.ghostView
 import hannah.bd.shelfify.R
 import hannah.bd.shelfify.modals.AppDatabase
 import hannah.bd.shelfify.modals.Stat
@@ -145,6 +146,8 @@ fun MenuView(
                 )
             }
         }
+
+        ghostView()
     }
 
     if (showSettings) {
