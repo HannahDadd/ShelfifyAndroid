@@ -56,38 +56,38 @@ fun crystalBallLibrary(
         }
 
 
-            Column(
-                modifier = Modifier
-                    .padding(24.dp)
-                    .padding(bottom = 70.dp)
+        Column(
+            modifier = Modifier
+                .padding(24.dp)
+                .padding(bottom = 70.dp)
+        ) {
+            Card(
+                colors = CardDefaults.cardColors(
+                    containerColor = Color.Black.copy(alpha = 0.6f)
+                ),
+                shape = RoundedCornerShape(16.dp),
             ) {
-                Card(
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color.Black.copy(alpha = 0.6f)
-                    ),
-                    shape = RoundedCornerShape(16.dp),
-                ) {
-                    Text(
-                        "Finished library",
-                        fontFamily = FontFamily(Font(R.font.bellefairregularfont)),
-                        color = Color.White,
-                        modifier = Modifier.padding(start = 8.dp, top = 8.dp, end = 8.dp)
-                    )
-                }
-                Spacer(modifier = Modifier.weight(1.0f))
-
-                Row {
-                    Spacer(modifier = Modifier.weight(1.0f))
-                    Image(
-                        painter = painterResource(R.drawable.next_btn),
-                        contentDescription = "Menu",
-                        modifier = Modifier
-                            .size(75.dp)
-                            .clickable {
-                                backAction()
-                            }
-                    )
-                }
+                Text(
+                    "The library completes at 100k words.",
+                    fontFamily = FontFamily(Font(R.font.bellefairregularfont)),
+                    color = Color.White,
+                    modifier = Modifier.padding(8.dp)
+                )
             }
+            Spacer(modifier = Modifier.weight(1.0f))
+
+            Row {
+                Spacer(modifier = Modifier.weight(1.0f))
+                Image(
+                    painter = painterResource(R.drawable.crystal_btn),
+                    contentDescription = "Menu",
+                    modifier = Modifier
+                        .size(75.dp)
+                        .clickable {
+                            backAction()
+                        }
+                )
+            }
+        }
     }
 }
