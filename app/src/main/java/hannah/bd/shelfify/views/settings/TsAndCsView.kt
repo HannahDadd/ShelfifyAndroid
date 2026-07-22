@@ -38,7 +38,6 @@ import hannah.bd.shelfify.views.notifications.DailyReminderButton
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TsAndCsView(
-    navController: NavController,
     navigateBack: () -> Unit
 ) {
 

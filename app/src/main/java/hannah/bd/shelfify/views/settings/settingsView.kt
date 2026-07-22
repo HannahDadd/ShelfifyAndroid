@@ -95,6 +95,9 @@ fun settingsView(navController: NavController) {
                 item { CategoryItem(title = "How Shelfify Works", icon = Icons.Outlined.Info, onClick = {
                     navController.navigate("howItWorks")
                 }) }
+                item { CategoryItem(title = "Meet the Family", icon = Icons.Outlined.AccountCircle, onClick = {
+                    navController.navigate("meetTheFamily")
+                }) }
                 item { CategoryItem(title = "Our Other Apps", icon = Icons.Outlined.AddCircle, onClick = {
                     navController.navigate("otherApps") })
                 }

@@ -28,6 +28,7 @@ import hannah.bd.shelfify.modals.AppDatabase
 import hannah.bd.shelfify.modals.UserPreferences
 import hannah.bd.shelfify.views.graphs.GraphForWriter
 import hannah.bd.shelfify.views.settings.HowItWorks
+import hannah.bd.shelfify.views.settings.MeetTheFamily
 import hannah.bd.shelfify.views.settings.OurOtherApps
 import hannah.bd.shelfify.views.settings.TsAndCsView
 import hannah.bd.shelfify.views.settings.privacyPolicyView
@@ -136,11 +137,14 @@ fun NavigationStack(
                 }, (60*60)
             )
         }
+        composable("meetTheFamily") {
+            MeetTheFamily() { navController.popBackStack() }
+        }
         composable("tsAndCs") {
-            TsAndCsView(navController) { navController.popBackStack() }
+            TsAndCsView() { navController.popBackStack() }
         }
         composable("privacyPolicy") {
-            privacyPolicyView(navController) { navController.popBackStack() }
+            privacyPolicyView() { navController.popBackStack() }
         }
         composable("howItWorks") {
             HowItWorks() { navController.popBackStack() }
