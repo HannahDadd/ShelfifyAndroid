@@ -8,6 +8,7 @@ import android.os.Build
 import androidx.annotation.RequiresPermission
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.graphics.drawable.IconCompat
 import hannah.bd.shelfify.R
 
 object NotificationHelper {
@@ -45,16 +46,16 @@ object NotificationHelper {
                 context,
                 CHANNEL_ID
             )
-                //.setSmallIcon(R.drawable.ic_notification)
-                .setContentTitle(title)
-                .setContentText(message)
-                .setAutoCancel(true)
+                .setSmallIcon(IconCompat.createWithResource(context, android.R.drawable.ic_menu_sort_by_size))
+                .setContentTitle("✍️ Let's get Writing!")
+                .setContentText("Time to add some words to that writing project.")
                 .build()
 
-        NotificationManagerCompat.from(context)
-            .notify(
-                System.currentTimeMillis().toInt(),
-                notification
-            )
+        val manager = NotificationManagerCompat.from(context)
+        manager.notify(1, notification)
+//            .notify(
+//                System.currentTimeMillis().toInt(),
+//                notification
+//            )
     }
 }

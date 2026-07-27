@@ -56,7 +56,7 @@ private fun getLibraryImage(wordsWritten: Int): Int {
     )
 
     val stage = ((wordsWritten / 5000) + 1)
-        .coerceIn(1, 20)
+        .coerceIn(1, 21)
 
     return libraryImages[stage - 1]
 }

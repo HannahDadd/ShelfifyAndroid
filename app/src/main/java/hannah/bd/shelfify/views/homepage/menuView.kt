@@ -124,7 +124,7 @@ fun MenuView(
             Row {
 
                 Image(
-                    painter = painterResource(R.drawable.menu_btn),
+                    painter = painterResource(R.drawable.write_btn),
                     contentDescription = "Menu",
                     modifier = Modifier
                         .size(buttonSize)
