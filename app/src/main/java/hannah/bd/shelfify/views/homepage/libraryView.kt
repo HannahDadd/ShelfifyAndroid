@@ -23,7 +23,7 @@ fun LibraryView(
                 id = getLibraryImage(wordsWritten)
             ),
             contentDescription = null,
-            contentScale = ContentScale.Crop,
+            contentScale = ContentScale.FillBounds,
             modifier = Modifier.fillMaxSize()
         )
     }

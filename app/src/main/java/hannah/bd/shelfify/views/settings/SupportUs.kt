@@ -4,6 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -69,15 +71,6 @@ fun SupportUs(
                 horizontalAlignment = Alignment.Start,
             ) {
                 item {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Image(
-                            painter = painterResource(R.drawable.me),
-                            contentDescription = null,
-                            modifier = Modifier.size(500.dp)
-                        )
-                    }
-                }
-                item {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(
                             """
@@ -90,6 +83,15 @@ fun SupportUs(
                                 Happy writing!
                             """.trimIndent(),
                             fontFamily = FontFamily(Font(hannah.bd.shelfify.R.font.bellefairregularfont)),
+                        )
+                    }
+                }
+                item {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Image(
+                            painter = painterResource(R.drawable.me),
+                            contentDescription = null,
+                            modifier = Modifier.fillMaxWidth()
                         )
                     }
                 }
