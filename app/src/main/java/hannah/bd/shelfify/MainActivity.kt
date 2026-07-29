@@ -84,9 +84,9 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     NavigationStack(
                         modifier = Modifier.padding(innerPadding),
-                        hasPermission = hasNotificationPermission,
-                        canPostPromoted = notificationManager.canPostPromotedNotifications(),
-                        onRequestPermission = { requestNotificationPermission() },
+//                        hasPermission = hasNotificationPermission,
+//                        canPostPromoted = notificationManager.canPostPromotedNotifications(),
+//                        onRequestPermission = { requestNotificationPermission() },
                         startTwentyMinsActivity = { startWritingSprint("20mins") },
                         startFortyMinsActivity = { startWritingSprint("40mins") },
                         startSixtyMinsActivity = { startWritingSprint("60mins") },
@@ -114,36 +114,23 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun openNotificationSettings() {
-        val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
-                putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
-            }
-        } else {
-            Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
-                putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
-            }
-        }
-        startActivity(intent)
-    }
-
     private fun startWritingSprint(delayLength: String) {
-        if (!hasNotificationPermission) {
-            Toast.makeText(this, "Please grant notification permission first", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        val intent = Intent(this, LiveUpdateSprintService::class.java).apply {
-            action = LiveUpdateSprintService.ACTION_START
-        }
-        intent.putExtra("delayLength", delayLength)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(intent)
-        } else {
-            startService(intent)
-        }
-
+//        if (!hasNotificationPermission) {
+//            Toast.makeText(this, "Please grant notification permission first", Toast.LENGTH_SHORT).show()
+//            return
+//        }
+//
+//        val intent = Intent(this, LiveUpdateSprintService::class.java).apply {
+//            action = LiveUpdateSprintService.ACTION_START
+//        }
+//        intent.putExtra("delayLength", delayLength)
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            startForegroundService(intent)
+//        } else {
+//            startService(intent)
+//        }
+//
         Toast.makeText(this, "Writing sprint started", Toast.LENGTH_SHORT).show()
     }
 }
@@ -152,7 +139,8 @@ class MainActivity : ComponentActivity() {
 fun AppMainPage(navController: NavController,
                 userPreferences: UserPreferences,
                 db: AppDatabase?,
-                onRequestPermission: () -> Unit,) {
+//                onRequestPermission: () -> Unit,
+                ) {
 
     val scope = rememberCoroutineScope()
     val hasSeenOnboarding by userPreferences
@@ -182,7 +170,7 @@ fun AppMainPage(navController: NavController,
                 onFinished = {
                     scope.launch {
                         userPreferences.completeOnboarding()
-                        onRequestPermission()
+//                        onRequestPermission()
                     }
                 }
             )

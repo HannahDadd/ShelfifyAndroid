@@ -46,9 +46,9 @@ sealed class Screen(val route: String) {
 @Composable
 fun NavigationStack(
     modifier: Modifier,
-    hasPermission: Boolean,
-    canPostPromoted: Boolean,
-    onRequestPermission: () -> Unit,
+//    hasPermission: Boolean,
+//    canPostPromoted: Boolean,
+//    onRequestPermission: () -> Unit,
     startTwentyMinsActivity: () -> Unit,
     startFortyMinsActivity: () -> Unit,
     startSixtyMinsActivity: () -> Unit,
@@ -63,8 +63,7 @@ fun NavigationStack(
             AppMainPage(
                 navController = navController,
                 preferences,
-                db,
-                onRequestPermission = onRequestPermission)
+                db)
         }
         composable(
             route = Screen.Grow.route
@@ -73,8 +72,8 @@ fun NavigationStack(
                 navController,
                 { navController.popBackStack() },
                 userPreferences = preferences,
-                hasPermission = hasPermission,
-                canPostPromoted = canPostPromoted,
+//                hasPermission = hasPermission,
+//                canPostPromoted = canPostPromoted,
                 startTwentyMinsActivity = startTwentyMinsActivity,
                 startFortyMinsActivity = startFortyMinsActivity,
                 startSixtyMinsActivity = startSixtyMinsActivity,
