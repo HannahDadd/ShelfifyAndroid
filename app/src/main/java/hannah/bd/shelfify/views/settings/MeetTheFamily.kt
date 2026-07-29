@@ -35,7 +35,7 @@ fun MeetTheFamily(
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        "📚 Meet the Family 📚",
+                        "👻 Meet the Family 👻",
                         fontFamily = FontFamily(Font(hannah.bd.shelfify.R.font.dynapuff)),
                     )
                 },

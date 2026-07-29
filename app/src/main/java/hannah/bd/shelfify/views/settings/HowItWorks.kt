@@ -33,7 +33,7 @@ fun HowItWorks(
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        "How Shelfify Works",
+                        "How Writer's Hollow Works",
                         fontFamily = FontFamily(Font(hannah.bd.shelfify.R.font.dynapuff)),
                     )
                 },
@@ -58,9 +58,11 @@ fun HowItWorks(
                 item {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text("""
-Property is hard to come by in this modern era. Luckily, you've stumbled across an abandoned library and all that's missing are the books! How do you add books? Simple. You write. Grow your library by completing writing sprints and adding words to your writing projects and books magically start filling the shelves.
+Property is hard to come by in this modern era. Luckily, you've stumbled across an abandoned library and all that's missing are the books! 
 
-A few ghosts may visit your library- don't worry, they're friendly. Ish. I can't wait to see what you do with the place.
+Grow your library by completing writing sprints and adding words to your writing projects.
+
+A few ghosts may visit your library- don't worry, they're friendly. I can't wait to see what you do with the place.
 
                         """.trimIndent(),
                             fontFamily = FontFamily(Font(hannah.bd.shelfify.R.font.bellefairregularfont)),

@@ -34,12 +34,12 @@ fun SprintCarousel(
             style = MaterialTheme.typography.labelLarge
         )
 
-        StartSprintCard(
-            text = "5 Secs (debug only)",
-            onClick = {
-                onAction(SprintDurations.FIVE_SECS)
-            }
-        )
+//        StartSprintCard(
+//            text = "5 Secs (debug only)",
+//            onClick = {
+//                onAction(SprintDurations.FIVE_SECS)
+//            }
+//        )
 
         StartSprintCard(
             text = "20 mins",

@@ -96,15 +96,15 @@ fun settingsView(navController: NavController) {
                 item {
                     Spacer(modifier = Modifier.height(16.dp))
                 }
-                item { CategoryItem(title = "How Shelfify Works", icon = Icons.Outlined.Info, onClick = {
+                item { CategoryItem(title = "How it Works", icon = Icons.Outlined.Info, onClick = {
                     navController.navigate("howItWorks")
                 }) }
-                item { CategoryItem(title = "Meet the Family", icon = Icons.Outlined.AccountCircle, onClick = {
-                    navController.navigate("meetTheFamily")
-                }) }
-                item { CategoryItem(title = "Our Other Apps", icon = Icons.Outlined.AddCircle, onClick = {
-                    navController.navigate("otherApps") })
-                }
+//                item { CategoryItem(title = "Meet the Family", icon = Icons.Outlined.AccountCircle, onClick = {
+//                    navController.navigate("meetTheFamily")
+//                }) }
+//                item { CategoryItem(title = "Our Other Apps", icon = Icons.Outlined.AddCircle, onClick = {
+//                    navController.navigate("otherApps") })
+//                }
                 item { HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp)) }
                 item { CategoryItem(title = "Support the app!", icon = Icons.Outlined.Favorite, onClick = {
                     navController.navigate("supportUs") })
