@@ -1,5 +1,6 @@
 package hannah.bd.shelfify.views.settings
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
@@ -55,13 +57,22 @@ fun OurOtherApps(
                 horizontalAlignment = Alignment.Start,
             ) {
                 item {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Image(
+                            painter = painterResource(R.drawable.giw_promo),
+                            contentDescription = null,
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    }
+                }
+                item {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text("""
 Get it Write will gamify your creative writing and get those words written.
     
 Featuring focused writing sprints to help you carve out the time, daily streaks to keep your word count on track, and daily notifications that form a consistent writing habit. Collect achievement badges as you hit author milestones and get detailed stats showing just how consistent you’re becoming.
     
-Whether you’re drafting your first novel in New York, polishing poetry in London, or journaling in the Highlands, the world is full of storytellers, they just need a place to start. Download Get it Write today, start your first sprint, and get those words written.
+Download Get it Write today, start your first sprint, and get those words written.
 
                         """.trimIndent(),
                             fontFamily = FontFamily(Font(hannah.bd.shelfify.R.font.bellefairregularfont)),
