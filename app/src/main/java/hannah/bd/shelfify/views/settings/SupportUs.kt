@@ -81,7 +81,13 @@ fun SupportUs(
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(
                             """
+                                Hello! I'm Hannah and thank you for downloading my app. I'm an Indie app developer who loves to write and support other writers.
                                 
+                                Writers Hollow is completely free and works fully off-line.
+                                
+                                If you're feeling generous, please support the app by giving it a review on the play store 💛
+                                
+                                Happy writing!
                             """.trimIndent(),
                             fontFamily = FontFamily(Font(hannah.bd.shelfify.R.font.bellefairregularfont)),
                         )
