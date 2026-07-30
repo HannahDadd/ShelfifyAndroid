@@ -50,7 +50,7 @@ fun crystalBallLibrary(
             Image(
                 painter = painterResource(R.drawable.library_21),
                 contentDescription = null,
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.FillBounds,
                 modifier = Modifier.fillMaxSize()
             )
         }
