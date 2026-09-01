@@ -34,7 +34,7 @@ fun backGroundView() {
             Image(
                 painter = painterResource(id = R.drawable.day),
                 contentDescription = "day",
-                contentScale = ContentScale.FillWidth,
+                contentScale = ContentScale.FillBounds,
                 modifier = Modifier.fillMaxSize()
             )
         }
@@ -42,7 +42,7 @@ fun backGroundView() {
             Image(
                 painter = painterResource(id = R.drawable.dawn),
                 contentDescription = "day",
-                contentScale = ContentScale.FillWidth,
+                contentScale = ContentScale.FillBounds,
                 modifier = Modifier.fillMaxSize()
             )
         }
@@ -50,7 +50,7 @@ fun backGroundView() {
             Image(
                 painter = painterResource(id = R.drawable.night),
                 contentDescription = "day",
-                contentScale = ContentScale.FillWidth,
+                contentScale = ContentScale.FillBounds,
                 modifier = Modifier.fillMaxSize()
             )
         }
