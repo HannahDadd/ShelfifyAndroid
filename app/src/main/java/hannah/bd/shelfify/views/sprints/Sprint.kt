@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,9 +30,12 @@ import androidx.compose.ui.unit.sp
 import hannah.bd.getitwrite.GlobalVariables
 import hannah.bd.getitwrite.GlobalVariables.inspiringQuotes
 import hannah.bd.shelfify.R
+import hannah.bd.shelfify.modals.Stat
 import hannah.bd.shelfify.views.sprints.SprintBackGroundView
 import kotlinx.coroutines.delay
+import java.util.Date
 import kotlin.math.floor
+import kotlin.random.Random
 
 @Composable
 fun Sprint(
@@ -82,6 +86,14 @@ fun Sprint(
                 fontFamily = FontFamily(Font(R.font.dynapuff)),
                 fontSize = 28.sp
             )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Button(onClick = {
+                onEnd()
+            }) {
+                Text("End Sprint Early")
+            }
 
             Spacer(modifier = Modifier.height(16.dp))
         }
